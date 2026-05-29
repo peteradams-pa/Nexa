@@ -82,12 +82,12 @@ const CSS_STYLES = `
   .sscroll::-webkit-scrollbar{width:0}
   .ssection{padding:10px 10px 2px}
   .ssec{font-size:9.5px;font-weight:700;letter-spacing:.1em;color:var(--t3);padding:0 7px 5px;text-transform:uppercase;white-space:nowrap;transition:opacity .15s}
-  .sit{display:flex;align-items:center;gap:9px;padding:7px 10px 7px 12px;border-radius:var(--radsm);cursor:pointer;color:var(--t2);font-weight:500;font-size:13px;transition:all .14s var(--ease);position:relative;white-space:nowrap;overflow:hidden;margin:1px 4px}
+  .sit{display:flex;align-items:center;gap:9px;padding:7px 10px 7px 12px;border-radius:var(--radsm);cursor:pointer;color:var(--t2);font-weight:500;font-size:13px;transition:all .14s var(--ease);position:relative;white-space:nowrap;overflow:hidden;margin:1px 4px;line-height:1;min-height:34px}
   .sit:hover{background:var(--sfh);color:var(--t)}
   .sit.act{background:rgba(108,108,255,.13);color:var(--a)}
   .sit.act::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:55%;background:var(--a);border-radius:0 3px 3px 0}
-  .sico{font-size:15px;flex-shrink:0;width:18px;text-align:center}
-  .slbl{flex:1;transition:opacity .15s;overflow:hidden;white-space:nowrap}
+  .sico{font-size:15px;flex-shrink:0;width:18px;text-align:center;display:flex;align-items:center;justify-content:center;line-height:1;height:18px}
+  .slbl{flex:1;transition:opacity .15s;overflow:hidden;white-space:nowrap;line-height:1;display:flex;align-items:center}
   .sbadge{font-size:10px;font-weight:700;background:var(--a);color:white;padding:1px 6px;border-radius:20px;flex-shrink:0;transition:opacity .15s}
   .sbadge.am{background:var(--am)}.sbadge.rd{background:var(--r)}
   .sbot{padding:8px;border-top:1px solid var(--bd);flex-shrink:0}
@@ -104,9 +104,10 @@ const CSS_STYLES = `
   .tbr{display:flex;align-items:center;gap:6px;flex-shrink:0}
   .bc{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--t2)}
   .bcsep{color:var(--t3)}.bccur{color:var(--t);font-weight:700}
-  .strig{display:flex;align-items:center;gap:8px;background:var(--sf);border:1px solid var(--bd);border-radius:var(--radsm);padding:6px 12px;cursor:pointer;transition:all .14s;min-width:180px;max-width:280px}
-  .strig:hover{border-color:var(--bdh);background:var(--sfh)}
-  .strig span{color:var(--t3);font-size:12.5px;flex:1}
+  .strig{display:flex;align-items:center;justify-content:center;width:36px;height:36px;background:var(--sf);border:1px solid var(--bd);border-radius:50%;cursor:pointer;transition:all .16s var(--ease);flex-shrink:0;outline:none;color:var(--t3)}
+  .strig:hover{border-color:var(--bdh);background:var(--sfh);box-shadow:0 0 0 3px rgba(108,108,255,.1);color:var(--t)}
+  .strig:focus-visible{box-shadow:0 0 0 3px rgba(108,108,255,.35);border-color:var(--a)}
+  .strig svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;transition:stroke .14s;display:block}
   .kbd{font-family:var(--mono);font-size:9.5px;color:var(--t3);background:var(--bg3);border:1px solid var(--bd);border-radius:4px;padding:1px 5px;white-space:nowrap}
   .content{flex:1;overflow-y:auto;overflow-x:hidden}
   .ci{padding:22px 24px}
@@ -343,6 +344,47 @@ const CSS_STYLES = `
     .g4,.g3,.g2{grid-template-columns:1fr}.ph{flex-direction:column}
     .strig{min-width:0;flex:1}.kbd{display:none}.topbar{padding:0 12px}
   }
+
+  /* ── SETTINGS PAGE ── */
+  .stg-wrap{display:grid;grid-template-columns:220px 1fr;gap:20px;align-items:start}
+  .stg-nav{background:var(--bg2);border:1px solid var(--bd);border-radius:var(--rad);padding:6px;position:sticky;top:0}
+  .stg-nav-sec{font-size:9px;font-weight:800;letter-spacing:.1em;color:var(--t3);text-transform:uppercase;padding:10px 10px 4px 12px}
+  .stg-nav-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:var(--radsm);cursor:pointer;color:var(--t2);font-size:12.5px;font-weight:500;transition:all .13s;white-space:nowrap;line-height:1}
+  .stg-nav-item:hover{background:var(--sfh);color:var(--t)}
+  .stg-nav-item.act{background:rgba(108,108,255,.12);color:var(--a)}
+  .stg-nav-item .stg-ico{width:28px;height:28px;border-radius:8px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+  .stg-nav-item.act .stg-ico{background:rgba(108,108,255,.15)}
+  .stg-panel{display:flex;flex-direction:column;gap:16px}
+  .stg-card{background:var(--bg2);border:1px solid var(--bd);border-radius:var(--rad);overflow:hidden}
+  .stg-card-head{padding:16px 20px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between}
+  .stg-card-title{font-size:13.5px;font-weight:700;letter-spacing:-.2px}
+  .stg-card-sub{font-size:11.5px;color:var(--t3);margin-top:2px}
+  .stg-card-body{padding:20px}
+  .stg-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--bd)}
+  .stg-row:last-child{border-bottom:none}
+  .stg-row-label{font-size:13px;font-weight:600}
+  .stg-row-sub{font-size:11.5px;color:var(--t3);margin-top:2px}
+  .stg-sep{height:1px;background:var(--bd);margin:4px 0}
+  /* color swatch */
+  .clr-swatch{width:28px;height:28px;border-radius:50%;cursor:pointer;transition:transform .14s,box-shadow .14s;flex-shrink:0}
+  .clr-swatch:hover{transform:scale(1.12)}
+  .clr-swatch.sel{box-shadow:0 0 0 3px white,0 0 0 5px var(--a)}
+  /* company profile card */
+  .co-card{background:var(--bg3);border:1px solid var(--bd);border-radius:var(--rad);padding:14px 16px;cursor:pointer;transition:all .14s;position:relative}
+  .co-card:hover{border-color:var(--bdh);transform:translateY(-1px);box-shadow:var(--sh)}
+  .co-card.active-co{border-color:var(--a);background:rgba(108,108,255,.07)}
+  .co-card-name{font-size:13.5px;font-weight:700;margin-bottom:3px}
+  .co-card-meta{font-size:11.5px;color:var(--t3)}
+  .co-active-pip{position:absolute;top:10px;right:10px;width:8px;height:8px;border-radius:50%;background:var(--g)}
+  /* var table */
+  .var-row{display:grid;grid-template-columns:1fr 1fr 36px;gap:8px;align-items:center;padding:6px 0;border-bottom:1px solid var(--bd)}
+  .var-row:last-child{border-bottom:none}
+  .var-key{font-size:12px;font-family:var(--mono);color:var(--a)}
+  .var-val{font-size:12px}
+  /* api key box */
+  .apikey-box{background:var(--bg3);border:1px solid var(--bd);border-radius:var(--radsm);padding:12px 14px;font-family:var(--mono);font-size:11.5px;color:var(--t3);word-break:break-all;letter-spacing:.02em}
+  @media(max-width:780px){.stg-wrap{grid-template-columns:1fr}}
+
   .noscroll{-ms-overflow-style:none;scrollbar-width:none}
   .noscroll::-webkit-scrollbar{display:none}
   .empty{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 20px;gap:10px}
@@ -3651,56 +3693,558 @@ function AIAssistant() {
 // ═══════════════════════════════════════════════════════════════════════════════
 function Settings() {
   const { state, actions } = useApp();
-  const [section, setSection] = useState("company");
+  const [section, setSection] = useState("appearance");
   const [show, toastEl] = useToast();
   const [revealed, setRevealed] = useState(false);
 
-  const co = state.company||{};
-  const st = state.settings||{};
-  const cu = state.currentUser||{};
+  const co  = state.company  || {};
+  const st  = state.settings || {};
+  const cu  = state.currentUser || {};
+  const log = state.auditLog || [];
 
-  const [compForm, setCompForm] = useState({...co});
-  const setCF=(k,v)=>setCompForm(p=>({...p,[k]:v}));
+  // ── company form ──────────────────────────────────────────────────────────
+  const [compForm, setComp] = useState({...co});
+  useEffect(() => setComp(c => ({...co})), [co.name]);
+  const setCF = (k,v) => setComp(p => ({...p,[k]:v}));
+  const saveCompany = () => { actions.updateCompany(compForm); show("Company info saved","g"); };
 
-  const saveCompany=()=>{ actions.updateCompany(compForm); show("Company info saved","g"); };
+  // ── profile form ──────────────────────────────────────────────────────────
+  const [profForm, setProf] = useState({ name:cu.name||"", email:cu.email||"", phone:"", dept:cu.dept||"", bio:"" });
+  const setPF = (k,v) => setProf(p => ({...p,[k]:v}));
 
-  const toggleSetting=(k)=>{
-    actions.updateSettings({[k]:!st[k]});
-    show(`${k} ${!st[k]?"enabled":"disabled"}`,"g");
+  // ── toggle helper ─────────────────────────────────────────────────────────
+  const tog = k => { actions.updateSettings({[k]:!st[k]}); show(`${k} ${!st[k]?"enabled":"disabled"}`,"g"); };
+
+  // ── multi-company profiles (persisted in localStorage separately) ─────────
+  const [companies, setCompanies] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem("nexa_companies") || "null") || [
+        { id:"co_1", name:"Nexa Corp", industry:"Technology", currency:"KES", country:"Kenya",
+          vatPin:"P051234567R", phone:"+254 700 000 000", website:"nexacorp.ke",
+          vars:{ defaultTax:"16", fiscalYear:"January", invoicePrefix:"INV", poPrefix:"PO",
+                 timezone:"Africa/Nairobi", dateFormat:"DD/MM/YYYY", weekStart:"Monday",
+                 lowStockThreshold:"10", paymentTerms:"30", reminderDays:"7" }},
+        { id:"co_2", name:"Nexa Uganda", industry:"Technology", currency:"UGX", country:"Uganda",
+          vatPin:"1001234567890", phone:"+256 700 000 000", website:"nexauganda.co.ug",
+          vars:{ defaultTax:"18", fiscalYear:"July", invoicePrefix:"UG-INV", poPrefix:"UG-PO",
+                 timezone:"Africa/Kampala", dateFormat:"DD/MM/YYYY", weekStart:"Monday",
+                 lowStockThreshold:"15", paymentTerms:"14", reminderDays:"5" }},
+      ];
+    } catch(e) { return []; }
+  });
+
+  const [activeCoId, setActiveCoId] = useState("co_1");
+  const [editVars,   setEditVars]   = useState(null);
+  const [varForm,    setVarForm]    = useState({});
+  const [showNewCo,  setShowNewCo]  = useState(false);
+
+  const activeCo = companies.find(c => c.id === activeCoId) || companies[0] || {};
+
+  const saveCompanies = updated => {
+    setCompanies(updated);
+    localStorage.setItem("nexa_companies", JSON.stringify(updated));
   };
 
-  const secs=[
-    {id:"company",ico:"🏢",l:"Company"},
-    {id:"profile",ico:"👤",l:"Profile"},
-    {id:"security",ico:"🔒",l:"Security"},
-    {id:"notifications",ico:"🔔",l:"Notifications"},
-    {id:"billing",ico:"💳",l:"Billing & Plans"},
-    {id:"integrations",ico:"🔗",l:"Integrations"},
-    {id:"appearance",ico:"🎨",l:"Appearance"},
-    {id:"localization",ico:"🌍",l:"Localization"},
-    {id:"users",ico:"👥",l:"Users & Permissions"},
-    {id:"api",ico:"⚡",l:"API & Webhooks"},
-    {id:"audit",ico:"📋",l:"Audit Log"},
-    {id:"shortcuts",ico:"⌨️",l:"Keyboard Shortcuts"},
+  const switchCompany = id => {
+    setActiveCoId(id);
+    const c = companies.find(x => x.id === id);
+    if(c) actions.updateCompany({ name:c.name, industry:c.industry, currency:c.currency, vatPin:c.vatPin, phone:c.phone });
+    show(`Switched to ${companies.find(x=>x.id===id)?.name}`,"g");
+  };
+
+  const deleteCompany = id => {
+    if(companies.length <= 1){ show("Cannot delete the only company","r"); return; }
+    saveCompanies(companies.filter(c => c.id !== id));
+    if(activeCoId === id) setActiveCoId(companies.find(c=>c.id!==id)?.id||"");
+    show("Company profile removed","g");
+  };
+
+  const openVars = co2 => { setEditVars(co2.id); setVarForm({...co2.vars}); };
+  const saveVars = () => {
+    saveCompanies(companies.map(c => c.id===editVars ? {...c,vars:{...varForm}} : c));
+    setEditVars(null); show("Variables saved","g");
+  };
+
+  // new company form
+  const emptyNewCo = {
+    id:"", name:"", industry:"Technology", currency:"KES", country:"Kenya", vatPin:"", phone:"", website:"",
+    vars:{ defaultTax:"16", fiscalYear:"January", invoicePrefix:"INV", poPrefix:"PO",
+           timezone:"Africa/Nairobi", dateFormat:"DD/MM/YYYY", weekStart:"Monday",
+           lowStockThreshold:"10", paymentTerms:"30", reminderDays:"7" }
+  };
+  const [newCoForm, setNewCo] = useState({...emptyNewCo});
+  const setNC = (k,v) => setNewCo(p => ({...p,[k]:v}));
+  const setNV = (k,v) => setNewCo(p => ({...p,vars:{...p.vars,[k]:v}}));
+
+  const addCompany = () => {
+    if(!newCoForm.name.trim()){ show("Company name required","r"); return; }
+    saveCompanies([...companies, {...newCoForm, id:`co_${Date.now()}`}]);
+    show("Company profile created","g");
+    setShowNewCo(false); setNewCo({...emptyNewCo});
+  };
+
+  // ── webhook state ─────────────────────────────────────────────────────────
+  const [webhookUrl, setWebhookUrl] = useState("");
+  const [webhookEvs, setWebhookEvs] = useState({invoice:true,lead:true,order:false,stock:true,ticket:false});
+  const toggleEv = k => setWebhookEvs(p => ({...p,[k]:!p[k]}));
+
+  // ── password form ─────────────────────────────────────────────────────────
+  const [pwForm, setPw] = useState({current:"",next:"",confirm:""});
+  const changePw = () => {
+    if(!pwForm.current){ show("Enter current password","r"); return; }
+    if(pwForm.next.length < 8){ show("New password must be ≥8 characters","r"); return; }
+    if(pwForm.next !== pwForm.confirm){ show("Passwords do not match","r"); return; }
+    setPw({current:"",next:"",confirm:""});
+    show("Password updated successfully","g");
+  };
+
+  // ── localization ──────────────────────────────────────────────────────────
+  const [locForm, setLoc] = useState({
+    timezone:"Africa/Nairobi", dateFormat:"DD/MM/YYYY",
+    timeFormat:"24h", numberFormat:"1,234.56",
+    weekStart:"Monday", language:"English (Kenya)"
+  });
+  const setL = (k,v) => setLoc(p => ({...p,[k]:v}));
+
+  // ── accent colours ────────────────────────────────────────────────────────
+  const ACCENTS = [
+    {c:"#6c6cff",l:"Indigo"},{c:"#8b5cf6",l:"Violet"},{c:"#06b6d4",l:"Cyan"},
+    {c:"#22c55e",l:"Emerald"},{c:"#f43f5e",l:"Rose"},{c:"#f59e0b",l:"Amber"},
+    {c:"#f97316",l:"Orange"},{c:"#ec4899",l:"Pink"},
   ];
+  const BG_MODES = [
+    {k:"#080810",l:"Midnight"},{k:"#0a0a0a",l:"Pure Black"},
+    {k:"#0d0d14",l:"Deep"},{k:"#0f1117",l:"Obsidian"},
+  ];
+
+  // ── variable metadata ─────────────────────────────────────────────────────
+  const VAR_META = {
+    defaultTax:        {label:"Default Tax Rate (%)",             hint:"Applied to all new invoices"},
+    fiscalYear:        {label:"Fiscal Year Start",                hint:"Month financial year begins"},
+    invoicePrefix:     {label:"Invoice Prefix",                   hint:"e.g. INV → INV-0001"},
+    poPrefix:          {label:"Purchase Order Prefix",            hint:"e.g. PO → PO-0001"},
+    timezone:          {label:"Default Timezone",                 hint:"Used for all date/time display"},
+    dateFormat:        {label:"Date Format",                      hint:"How dates are displayed"},
+    weekStart:         {label:"Week Starts On",                   hint:"First day of the week"},
+    lowStockThreshold: {label:"Low Stock Threshold (%)",          hint:"Alert when stock falls below this"},
+    paymentTerms:      {label:"Default Payment Terms (days)",     hint:"Net days for new invoices"},
+    reminderDays:      {label:"Payment Reminder (days before due)",hint:"Send reminder N days before due"},
+  };
+
+  // ── sidebar nav ───────────────────────────────────────────────────────────
+  const NAV = [
+    { sec:"Workspace", items:[
+      {id:"appearance",   ico:"🎨", l:"Appearance & Theme"},
+      {id:"localization", ico:"🌍", l:"Localization"},
+    ]},
+    { sec:"Account", items:[
+      {id:"profile",       ico:"👤", l:"My Profile"},
+      {id:"security",      ico:"🔒", l:"Security"},
+      {id:"notifications", ico:"🔔", l:"Notifications"},
+    ]},
+    { sec:"Organisation", items:[
+      {id:"companies", ico:"🏢", l:"Company Profiles"},
+      {id:"users",     ico:"👥", l:"Users & Permissions"},
+      {id:"billing",   ico:"💳", l:"Billing & Plans"},
+    ]},
+    { sec:"Developer", items:[
+      {id:"api",          ico:"⚡", l:"API & Webhooks"},
+      {id:"integrations", ico:"🔗", l:"Integrations"},
+    ]},
+    { sec:"System", items:[
+      {id:"audit",     ico:"📋", l:"Audit Log"},
+      {id:"shortcuts", ico:"⌨️", l:"Shortcuts"},
+    ]},
+  ];
+
+  // ── re-usable sub-components ──────────────────────────────────────────────
+  const Card = ({title, sub, action, children}) => (
+    <div className="stg-card">
+      <div className="stg-card-head">
+        <div>
+          <div className="stg-card-title">{title}</div>
+          {sub && <div className="stg-card-sub">{sub}</div>}
+        </div>
+        {action}
+      </div>
+      <div className="stg-card-body">{children}</div>
+    </div>
+  );
+
+  const Row = ({ico, label, sub, right}) => (
+    <div className="stg-row">
+      <div className="f fa gap3">
+        {ico && <div style={{width:32,height:32,borderRadius:8,background:"var(--bg3)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:14,flexShrink:0}}>{ico}</div>}
+        <div>
+          <div className="stg-row-label">{label}</div>
+          {sub && <div className="stg-row-sub">{sub}</div>}
+        </div>
+      </div>
+      <div style={{flexShrink:0}}>{right}</div>
+    </div>
+  );
+
+  const Tog = ({k}) => <div className={`tog ${st[k]?"on":""}`} onClick={()=>tog(k)}/>;
 
   return (
     <div className="ci">
       {toastEl}
-      <div className="ph"><h1 className="ptitle">Settings</h1></div>
-      <div className="g gap4" style={{gridTemplateColumns:"196px 1fr"}}>
-        <div className="card" style={{padding:6,height:"fit-content"}}>
-          {secs.map(s=>(
-            <div key={s.id} className={`sit${section===s.id?" act":""}`} onClick={()=>setSection(s.id)}>
-              <span className="sico">{s.ico}</span><span className="slbl">{s.l}</span>
+
+      {/* ══ New Company Modal ══════════════════════════════════════════════ */}
+      {showNewCo && (
+        <div className="ov" onClick={()=>setShowNewCo(false)}>
+          <div className="modal mlg" onClick={e=>e.stopPropagation()}>
+            <div className="mh">
+              <span className="mt">New Company Profile</span>
+              <button className="btn btg bicos" onClick={()=>setShowNewCo(false)}>✕</button>
+            </div>
+            <div className="mb2">
+              <div className="sectitle mb3">Basic Information</div>
+              <div className="g g2 gap3 mb5">
+                <div className="field"><label className="flbl">Company Name *</label><input className="inp" value={newCoForm.name} onChange={e=>setNC("name",e.target.value)} placeholder="Acme Corp"/></div>
+                <div className="field"><label className="flbl">Industry</label>
+                  <select className="inp" value={newCoForm.industry} onChange={e=>setNC("industry",e.target.value)}>
+                    {["Technology","Finance","Manufacturing","Retail","Healthcare","Education","Other"].map(i=><option key={i}>{i}</option>)}
+                  </select>
+                </div>
+                <div className="field"><label className="flbl">Country</label>
+                  <select className="inp" value={newCoForm.country} onChange={e=>setNC("country",e.target.value)}>
+                    {["Kenya","Uganda","Tanzania","Rwanda","Nigeria","South Africa","Ghana","Other"].map(c=><option key={c}>{c}</option>)}
+                  </select>
+                </div>
+                <div className="field"><label className="flbl">Currency</label>
+                  <select className="inp" value={newCoForm.currency} onChange={e=>setNC("currency",e.target.value)}>
+                    {["KES","UGX","TZS","RWF","NGN","ZAR","GHS","USD","EUR","GBP"].map(c=><option key={c}>{c}</option>)}
+                  </select>
+                </div>
+                <div className="field"><label className="flbl">VAT / Tax PIN</label><input className="inp" value={newCoForm.vatPin} onChange={e=>setNC("vatPin",e.target.value)} placeholder="Tax registration number"/></div>
+                <div className="field"><label className="flbl">Phone</label><input className="inp" value={newCoForm.phone} onChange={e=>setNC("phone",e.target.value)} placeholder="+254 700 000 000"/></div>
+                <div className="field" style={{gridColumn:"span 2"}}><label className="flbl">Website</label><input className="inp" value={newCoForm.website} onChange={e=>setNC("website",e.target.value)} placeholder="yourcompany.com"/></div>
+              </div>
+              <div className="sectitle mb3">Company Global Variables</div>
+              <div style={{background:"var(--bg3)",borderRadius:"var(--radsm)",border:"1px solid var(--bd)",overflow:"hidden"}}>
+                {Object.entries(newCoForm.vars).map(([k,v])=>(
+                  <div key={k} style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12,padding:"10px 14px",borderBottom:"1px solid var(--bd)",alignItems:"center"}}>
+                    <div>
+                      <div style={{fontFamily:"var(--mono)",fontSize:11.5,color:"var(--a)"}}>{k}</div>
+                      <div className="xs t3">{VAR_META[k]?.hint}</div>
+                    </div>
+                    <input className="inp" style={{height:30,fontSize:12}} value={v} onChange={e=>setNV(k,e.target.value)}/>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="mf">
+              <button className="btn btg" onClick={()=>setShowNewCo(false)}>Cancel</button>
+              <button className="btn btp" onClick={addCompany}>Create Company Profile</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ══ Edit Variables Modal ═══════════════════════════════════════════ */}
+      {editVars && (
+        <div className="ov" onClick={()=>setEditVars(null)}>
+          <div className="modal" onClick={e=>e.stopPropagation()}>
+            <div className="mh">
+              <div>
+                <div className="mt">Global Variables</div>
+                <div className="xs t3 mt1">{companies.find(c=>c.id===editVars)?.name}</div>
+              </div>
+              <button className="btn btg bicos" onClick={()=>setEditVars(null)}>✕</button>
+            </div>
+            <div className="mb2">
+              <div style={{background:"var(--bg3)",borderRadius:"var(--radsm)",border:"1px solid var(--bd)",overflow:"hidden"}}>
+                {Object.entries(varForm).map(([k,v])=>(
+                  <div key={k} style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12,padding:"10px 14px",borderBottom:"1px solid var(--bd)",alignItems:"center"}}>
+                    <div>
+                      <div style={{fontFamily:"var(--mono)",fontSize:11.5,color:"var(--a)"}}>{k}</div>
+                      <div className="xs t3">{VAR_META[k]?.hint||""}</div>
+                    </div>
+                    <input className="inp" style={{height:30,fontSize:12}} value={v} onChange={e=>setVarForm(p=>({...p,[k]:e.target.value}))}/>
+                  </div>
+                ))}
+              </div>
+              <div className="xs t3 mt3" style={{padding:"0 2px"}}>Variables apply globally within this company profile and take effect immediately after saving.</div>
+            </div>
+            <div className="mf">
+              <button className="btn btg" onClick={()=>setEditVars(null)}>Cancel</button>
+              <button className="btn btp" onClick={saveVars}>Save Variables</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ══ Page header ═══════════════════════════════════════════════════ */}
+      <div className="ph">
+        <div>
+          <h1 className="ptitle">Settings</h1>
+          <p className="psub">Manage your workspace, account, and company configuration</p>
+        </div>
+      </div>
+
+      <div className="stg-wrap">
+
+        {/* ══ Left sidebar nav ══════════════════════════════════════════ */}
+        <div className="stg-nav">
+          {NAV.map((group,gi)=>(
+            <div key={group.sec}>
+              <div className="stg-nav-sec">{group.sec}</div>
+              {group.items.map(item=>(
+                <div key={item.id} className={`stg-nav-item ${section===item.id?"act":""}`} onClick={()=>setSection(item.id)}>
+                  <div className="stg-ico">{item.ico}</div>
+                  <span>{item.l}</span>
+                </div>
+              ))}
+              {gi < NAV.length-1 && <div className="stg-sep"/>}
             </div>
           ))}
         </div>
-        <div className="fc gap4">
 
-          {section==="company"&&(
-            <div className="card cp">
-              <div className="ct mb5">Company Information</div>
+        {/* ══ Right panel ════════════════════════════════════════════════ */}
+        <div className="stg-panel">
+
+          {/* ─── APPEARANCE ─────────────────────────────────────────── */}
+          {section==="appearance" && <>
+            <Card title="Accent Color" sub="Personalise the interface colour theme">
+              <div className="f fa gap4 fw mb2">
+                {ACCENTS.map(({c,l})=>(
+                  <div key={c} style={{display:"flex",flexDirection:"column",alignItems:"center",gap:6}}>
+                    <div style={{
+                      width:30,height:30,borderRadius:"50%",background:c,cursor:"pointer",
+                      transition:"transform .14s,box-shadow .14s",flexShrink:0,
+                      boxShadow: st.accentColor===c ? `0 0 0 3px var(--bg2), 0 0 0 5px ${c}` : "none",
+                      transform: st.accentColor===c ? "scale(1.15)" : "scale(1)",
+                    }} onClick={()=>{ actions.updateSettings({accentColor:c}); show(`Theme: ${l}`,"g"); }}/>
+                    <span className="xs t3">{l}</span>
+                  </div>
+                ))}
+              </div>
+            </Card>
+
+            <Card title="Background Mode" sub="Choose the base darkness level for the interface">
+              <div className="f fa gap3 fw">
+                {BG_MODES.map(({k,l})=>(
+                  <div key={k} onClick={()=>{ actions.updateSettings({bgMode:k}); show(`Background: ${l}`,"g"); }}
+                    style={{
+                      display:"flex",alignItems:"center",gap:8,padding:"9px 14px",
+                      borderRadius:"var(--radsm)",cursor:"pointer",transition:"all .13s",
+                      border:`1px solid ${st.bgMode===k?"var(--a)":"var(--bd)"}`,
+                      background: st.bgMode===k ? "rgba(108,108,255,.08)" : "var(--bg3)",
+                    }}>
+                    <div style={{width:16,height:16,borderRadius:4,background:k,border:"1px solid rgba(255,255,255,.15)",flexShrink:0}}/>
+                    <span style={{fontSize:12.5,fontWeight:600}}>{l}</span>
+                    {st.bgMode===k && <span className="tg" style={{fontSize:12}}>✓</span>}
+                  </div>
+                ))}
+              </div>
+            </Card>
+
+            <Card title="Interface Preferences" sub="Fine-tune the layout and visual behaviour">
+              {[
+                {k:"compactSidebar",ico:"◀",l:"Compact Sidebar",   sub:"Collapse navigation to icons only"},
+                {k:"reducedMotion", ico:"⏸",l:"Reduced Motion",    sub:"Disable all transitions and animations"},
+                {k:"highContrast",  ico:"◐",l:"High Contrast",     sub:"Increase border and text contrast"},
+                {k:"denseMode",     ico:"⊞",l:"Dense Mode",        sub:"Tighter spacing and smaller elements"},
+                {k:"showAvatars",   ico:"👤",l:"Show Avatars",      sub:"Display profile pictures in lists and tables"},
+                {k:"sidebarGradient",ico:"🎨",l:"Sidebar Gradient", sub:"Subtle gradient background in sidebar"},
+              ].map(p=>(
+                <Row key={p.k} ico={p.ico} label={p.l} sub={p.sub} right={<Tog k={p.k}/>}/>
+              ))}
+            </Card>
+          </>}
+
+          {/* ─── LOCALIZATION ──────────────────────────────────────── */}
+          {section==="localization" && (
+            <Card title="Localization & Regional Settings" sub="Configure time, date, number and regional formatting">
+              <div className="g g2 gap3">
+                <div className="field"><label className="flbl">Language</label>
+                  <select className="inp" value={locForm.language} onChange={e=>setL("language",e.target.value)}>
+                    {["English (Kenya)","English (Uganda)","English (Tanzania)","Swahili","French","Portuguese"].map(l=><option key={l}>{l}</option>)}
+                  </select>
+                </div>
+                <div className="field"><label className="flbl">Timezone</label>
+                  <select className="inp" value={locForm.timezone} onChange={e=>setL("timezone",e.target.value)}>
+                    {["Africa/Nairobi","Africa/Kampala","Africa/Dar_es_Salaam","Africa/Kigali","Africa/Lagos","Africa/Johannesburg","Europe/London","America/New_York","Asia/Dubai"].map(t=><option key={t}>{t}</option>)}
+                  </select>
+                </div>
+                <div className="field"><label className="flbl">Date Format</label>
+                  <select className="inp" value={locForm.dateFormat} onChange={e=>setL("dateFormat",e.target.value)}>
+                    {["DD/MM/YYYY","MM/DD/YYYY","YYYY-MM-DD","D MMM YYYY"].map(f=><option key={f}>{f}</option>)}
+                  </select>
+                </div>
+                <div className="field"><label className="flbl">Time Format</label>
+                  <select className="inp" value={locForm.timeFormat} onChange={e=>setL("timeFormat",e.target.value)}>
+                    <option value="24h">24-hour (14:30)</option>
+                    <option value="12h">12-hour (2:30 PM)</option>
+                  </select>
+                </div>
+                <div className="field"><label className="flbl">Number Format</label>
+                  <select className="inp" value={locForm.numberFormat} onChange={e=>setL("numberFormat",e.target.value)}>
+                    <option value="1,234.56">1,234.56 (English)</option>
+                    <option value="1.234,56">1.234,56 (European)</option>
+                    <option value="1 234.56">1 234.56 (French)</option>
+                  </select>
+                </div>
+                <div className="field"><label className="flbl">Week Starts On</label>
+                  <select className="inp" value={locForm.weekStart} onChange={e=>setL("weekStart",e.target.value)}>
+                    {["Monday","Sunday","Saturday"].map(d=><option key={d}>{d}</option>)}
+                  </select>
+                </div>
+              </div>
+              <button className="btn btp mt3" onClick={()=>show("Localization settings saved","g")}>Save Localization</button>
+            </Card>
+          )}
+
+          {/* ─── PROFILE ───────────────────────────────────────────── */}
+          {section==="profile" && <>
+            <Card title="Personal Information" sub="Update your name, contact details and bio">
+              <div className="f fa gap4 mb5">
+                <Av name={cu.name||"?"} size="xl"/>
+                <div>
+                  <div style={{fontSize:17,fontWeight:800,marginBottom:4}}>{cu.name}</div>
+                  <div className="xs t3 mb2">{cu.email}</div>
+                  <div className="f fa gap2">
+                    <span className="badge bb xs">{cu.role}</span>
+                    <span className="badge bgr xs">{cu.dept||"—"}</span>
+                  </div>
+                </div>
+                <button className="btn btg bsm" style={{marginLeft:"auto",alignSelf:"flex-start"}} onClick={()=>show("Photo upload triggered","g")}>📷 Change Photo</button>
+              </div>
+              <div className="g g2 gap3">
+                <div className="field"><label className="flbl">Full Name</label><input className="inp" value={profForm.name} onChange={e=>setPF("name",e.target.value)}/></div>
+                <div className="field"><label className="flbl">Email Address</label><input className="inp" type="email" value={profForm.email} onChange={e=>setPF("email",e.target.value)}/></div>
+                <div className="field"><label className="flbl">Phone Number</label><input className="inp" value={profForm.phone} onChange={e=>setPF("phone",e.target.value)} placeholder="+254 7xx xxx xxx"/></div>
+                <div className="field"><label className="flbl">Department</label><input className="inp" value={profForm.dept} onChange={e=>setPF("dept",e.target.value)}/></div>
+                <div className="field" style={{gridColumn:"span 2"}}><label className="flbl">Bio</label><textarea className="inp" value={profForm.bio} onChange={e=>setPF("bio",e.target.value)} placeholder="Brief description…" style={{minHeight:70}}/></div>
+              </div>
+              <button className="btn btp mt3" onClick={()=>show("Profile updated","g")}>Save Profile</button>
+            </Card>
+
+            <Card title="Active Session">
+              <Row label="Current Device" sub={`Chrome on ${navigator.platform||"Unknown"} · IP 196.201.x.x · Nairobi, KE`} right={<span className="badge bg xs">● Active</span>}/>
+              <Row label="Signed In" sub={`Today at ${new Date().toLocaleTimeString()}`} right={null}/>
+            </Card>
+          </>}
+
+          {/* ─── SECURITY ──────────────────────────────────────────── */}
+          {section==="security" && <>
+            <Card title="Change Password">
+              <div className="g g2 gap3">
+                <div className="field" style={{gridColumn:"span 2"}}><label className="flbl">Current Password</label><input className="inp" type="password" value={pwForm.current} onChange={e=>setPw(p=>({...p,current:e.target.value}))} placeholder="••••••••"/></div>
+                <div className="field"><label className="flbl">New Password</label><input className="inp" type="password" value={pwForm.next} onChange={e=>setPw(p=>({...p,next:e.target.value}))} placeholder="Min 8 characters"/></div>
+                <div className="field"><label className="flbl">Confirm Password</label><input className="inp" type="password" value={pwForm.confirm} onChange={e=>setPw(p=>({...p,confirm:e.target.value}))} placeholder="Repeat password"/></div>
+              </div>
+              {pwForm.next && (
+                <div className="f fa gap3 mt2" style={{flexWrap:"wrap",fontSize:11.5}}>
+                  {[
+                    {ok:pwForm.next.length>=8,    l:"8+ chars"},
+                    {ok:/[A-Z]/.test(pwForm.next),l:"Uppercase"},
+                    {ok:/[0-9]/.test(pwForm.next),l:"Number"},
+                    {ok:/[^a-zA-Z0-9]/.test(pwForm.next),l:"Symbol"},
+                  ].map(r=>(
+                    <span key={r.l} style={{color:r.ok?"var(--g)":"var(--t3)",display:"flex",alignItems:"center",gap:3}}>
+                      {r.ok?"✓":"○"} {r.l}
+                    </span>
+                  ))}
+                </div>
+              )}
+              <button className="btn btp mt3" onClick={changePw}>Update Password</button>
+            </Card>
+
+            <Card title="Security Options">
+              {[
+                {k:"twoFactor",     ico:"🔑",l:"Two-Factor Authentication",   sub:"Require TOTP on every login"},
+                {k:"biometric",     ico:"👆",l:"Biometric Login",             sub:"Fingerprint / Face ID (PWA only)"},
+                {k:"sessionTimeout",ico:"⏱",l:"Auto Session Timeout",        sub:"Sign out after 30 min of inactivity"},
+                {k:"auditLogging",  ico:"📋",l:"Full Audit Logging",          sub:"Record every user action"},
+                {k:"ipRestriction", ico:"🛡",l:"IP Allow-list",               sub:"Only trusted IP ranges can sign in"},
+                {k:"loginAlerts",   ico:"📧",l:"Login Alert Emails",          sub:"Email on every new device sign-in"},
+              ].map(p=><Row key={p.k} ico={p.ico} label={p.l} sub={p.sub} right={<Tog k={p.k}/>}/>)}
+            </Card>
+
+            <Card title="Active Sessions">
+              {[
+                {d:"Chrome · Nairobi, Kenya",  ip:"196.201.x.x",time:"Current session",cur:true },
+                {d:"Mobile Safari · Mombasa",  ip:"105.163.x.x",time:"2 days ago",      cur:false},
+                {d:"Firefox · Kisumu, Kenya",  ip:"196.202.x.x",time:"5 days ago",      cur:false},
+              ].map((s,i)=>(
+                <Row key={i} ico="💻" label={s.d} sub={`${s.ip} · ${s.time}`}
+                  right={s.cur
+                    ? <span className="badge bg xs">● Current</span>
+                    : <button className="btn btd bxs" onClick={()=>show("Session revoked","g")}>Revoke</button>}/>
+              ))}
+            </Card>
+          </>}
+
+          {/* ─── NOTIFICATIONS ─────────────────────────────────────── */}
+          {section==="notifications" && <>
+            <Card title="Notification Channels">
+              {[
+                {k:"emailNotifications",ico:"📧",l:"Email Notifications",  sub:"Important alerts via email"},
+                {k:"smsNotifications",  ico:"📱",l:"SMS Notifications",    sub:"Critical alerts via SMS"},
+                {k:"pushNotifications", ico:"🔔",l:"Browser Push",         sub:"Desktop and mobile push notifications"},
+                {k:"slackNotifications",ico:"💬",l:"Slack",                sub:"Post alerts to a Slack channel"},
+              ].map(p=><Row key={p.k} ico={p.ico} label={p.l} sub={p.sub} right={<Tog k={p.k}/>}/>)}
+            </Card>
+
+            <Card title="Event Triggers" sub="Choose which events generate notifications">
+              <div className="g g2 gap2 mb3">
+                {[
+                  {k:"notifInvoicePaid",    l:"Invoice Paid"},
+                  {k:"notifInvoiceOverdue", l:"Invoice Overdue"},
+                  {k:"notifNewLead",        l:"New Lead Created"},
+                  {k:"notifDealWon",        l:"Deal Won"},
+                  {k:"notifLowStock",       l:"Low Stock Alert"},
+                  {k:"notifNewTicket",      l:"New Support Ticket"},
+                  {k:"notifTicketResolved", l:"Ticket Resolved"},
+                  {k:"notifPayroll",        l:"Payroll Processed"},
+                ].map(p=>(
+                  <label key={p.k} className="f fa gap2 cur" style={{padding:"9px 12px",background:"var(--bg3)",borderRadius:"var(--radsm)",border:"1px solid var(--bd)"}}>
+                    <input type="checkbox" defaultChecked style={{accentColor:"var(--a)",width:14,height:14}}/>
+                    <span style={{fontSize:12.5}}>{p.l}</span>
+                  </label>
+                ))}
+              </div>
+              <button className="btn btp bsm" onClick={()=>show("Notification preferences saved","g")}>Save Preferences</button>
+            </Card>
+          </>}
+
+          {/* ─── COMPANIES ─────────────────────────────────────────── */}
+          {section==="companies" && <>
+            <Card title="Company Profiles" sub={`${companies.length} profile${companies.length!==1?"s":""} configured · Click Switch to change active entity`}
+              action={<button className="btn btp bsm" onClick={()=>setShowNewCo(true)}>+ New Profile</button>}>
+              <div className="g g2 gap3">
+                {companies.map(c=>(
+                  <div key={c.id} className={`co-card ${c.id===activeCoId?"active-co":""}`}>
+                    {c.id===activeCoId && <div className="co-active-pip"/>}
+                    <div className="f fa gap3 mb3">
+                      <div style={{width:42,height:42,borderRadius:11,background:"linear-gradient(135deg,var(--a),var(--a2))",display:"flex",alignItems:"center",justifyContent:"center",fontSize:18,fontWeight:900,color:"white",flexShrink:0}}>
+                        {c.name.charAt(0)}
+                      </div>
+                      <div style={{flex:1,minWidth:0}}>
+                        <div className="co-card-name trunc">{c.name}</div>
+                        <div className="co-card-meta">{c.industry} · {c.country} · {c.currency}</div>
+                      </div>
+                    </div>
+                    <div className="f fa gap1 fw mb3">
+                      {c.vatPin && <span className="badge bgr xs">PIN: {c.vatPin}</span>}
+                      {c.phone  && <span className="badge bgr xs">{c.phone}</span>}
+                    </div>
+                    <div className="f gap2">
+                      {c.id!==activeCoId
+                        ? <button className="btn btp bxs f1" style={{justifyContent:"center"}} onClick={()=>switchCompany(c.id)}>Switch →</button>
+                        : <button className="btn bts bxs f1" style={{justifyContent:"center"}} disabled>✓ Active</button>}
+                      <button className="btn btg bxs" onClick={()=>openVars(c)}>⚙ Variables</button>
+                      {c.id!==activeCoId && <button className="btn btd bxs" onClick={()=>deleteCompany(c.id)}>🗑</button>}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Card>
+
+            <Card title={`Active Company — ${activeCo.name}`} sub="Edit the information for the currently active entity"
+              action={<button className="btn btp bsm" onClick={saveCompany}>Save Changes</button>}>
               <div className="g g2 gap3">
                 <div className="field"><label className="flbl">Company Name</label><input className="inp" value={compForm.name||""} onChange={e=>setCF("name",e.target.value)}/></div>
                 <div className="field"><label className="flbl">Legal Name</label><input className="inp" value={compForm.legal||""} onChange={e=>setCF("legal",e.target.value)}/></div>
@@ -3709,162 +4253,251 @@ function Settings() {
                     {["Technology","Finance","Manufacturing","Retail","Healthcare","Education","Other"].map(i=><option key={i}>{i}</option>)}
                   </select>
                 </div>
-                <div className="field"><label className="flbl">Default Currency</label>
+                <div className="field"><label className="flbl">Currency</label>
                   <select className="inp" value={compForm.currency||"KES"} onChange={e=>setCF("currency",e.target.value)}>
-                    <option value="KES">KES — Kenyan Shilling</option><option value="USD">USD — US Dollar</option><option value="EUR">EUR — Euro</option>
+                    {["KES","UGX","TZS","RWF","NGN","ZAR","USD","EUR","GBP"].map(c=><option key={c}>{c}</option>)}
                   </select>
                 </div>
-                <div className="field"><label className="flbl">VAT / KRA PIN</label><input className="inp" value={compForm.vatPin||""} onChange={e=>setCF("vatPin",e.target.value)}/></div>
+                <div className="field"><label className="flbl">VAT / Tax PIN</label><input className="inp" value={compForm.vatPin||""} onChange={e=>setCF("vatPin",e.target.value)}/></div>
                 <div className="field"><label className="flbl">Phone</label><input className="inp" value={compForm.phone||""} onChange={e=>setCF("phone",e.target.value)}/></div>
-                <div className="field" style={{gridColumn:"span 2"}}><label className="flbl">Registered Address</label><textarea className="inp" value={compForm.address||""} onChange={e=>setCF("address",e.target.value)}/></div>
+                <div className="field"><label className="flbl">Website</label><input className="inp" value={compForm.website||""} onChange={e=>setCF("website",e.target.value)} placeholder="yourcompany.com"/></div>
+                <div className="field"><label className="flbl">Fiscal Year Start</label>
+                  <select className="inp" value={compForm.fiscalYear||"January"} onChange={e=>setCF("fiscalYear",e.target.value)}>
+                    {["January","April","July","October"].map(m=><option key={m}>{m}</option>)}
+                  </select>
+                </div>
+                <div className="field" style={{gridColumn:"span 2"}}><label className="flbl">Registered Address</label><textarea className="inp" value={compForm.address||""} onChange={e=>setCF("address",e.target.value)} style={{minHeight:64}}/></div>
               </div>
-              <button className="btn btp mt3" onClick={saveCompany}>Save Company Info</button>
-            </div>
-          )}
+            </Card>
 
-          {section==="profile"&&(
-            <div className="card cp">
-              <div className="ct mb5">My Profile</div>
-              <div className="f fa gap3 mb5">
-                <Av name={cu.name||"?"} size="xl"/>
-                <div><div className="bold" style={{fontSize:16}}>{cu.name}</div><div className="xs t3">{cu.email}</div><div className="xs t3">{cu.role} · {cu.company}</div></div>
-              </div>
-              <div className="g g2 gap3">
-                <div className="field"><label className="flbl">Full Name</label><input className="inp" defaultValue={cu.name||""}/></div>
-                <div className="field"><label className="flbl">Email</label><input className="inp" type="email" defaultValue={cu.email||""}/></div>
-                <div className="field"><label className="flbl">Job Title</label><input className="inp" defaultValue={cu.role||""}/></div>
-                <div className="field"><label className="flbl">Phone</label><input className="inp" placeholder="+254 7xx xxx xxx"/></div>
-              </div>
-              <button className="btn btp mt3" onClick={()=>show("Profile saved","g")}>Save Profile</button>
-            </div>
-          )}
-
-          {section==="security"&&(
-            <div className="card cp">
-              <div className="ct mb5">Security Settings</div>
-              {[
-                {k:"twoFactor",   l:"Two-Factor Authentication",sub:"TOTP via Google Authenticator"},
-                {k:"biometric",   l:"Biometric Login",          sub:"Fingerprint / Face ID"},
-                {k:"sessionTimeout",l:"Session Timeout",        sub:"Auto-logout after 30 minutes"},
-                {k:"auditLogging",l:"Audit Logging",            sub:"Log all user actions"},
-                {k:"ipRestriction",l:"IP Restriction",          sub:"Only allow trusted IPs"},
-              ].map(p=>(
-                <div key={p.k} className="mrow">
-                  <div><div style={{fontSize:12.5,fontWeight:700}}>{p.l}</div><div className="xs t3">{p.sub}</div></div>
-                  <div className={`tog ${st[p.k]?"on":""}`} onClick={()=>toggleSetting(p.k)}/>
+            <Card title={`Global Variables — ${activeCo.name}`} sub="Runtime constants applied across all modules for this company"
+              action={<button className="btn btg bsm" onClick={()=>openVars(activeCo)}>✏ Edit Variables</button>}>
+              {Object.entries(activeCo.vars||{}).map(([k,v])=>(
+                <div key={k} className="stg-row">
+                  <div>
+                    <div className="f fa gap2">
+                      <code style={{fontSize:11.5,color:"var(--a)",fontFamily:"var(--mono)"}}>{k}</code>
+                      <span className="xs t3">— {VAR_META[k]?.label||k}</span>
+                    </div>
+                    <div className="xs t3 mt1">{VAR_META[k]?.hint}</div>
+                  </div>
+                  <div style={{background:"var(--bg3)",border:"1px solid var(--bd)",borderRadius:"var(--radsm)",padding:"3px 11px",fontFamily:"var(--mono)",fontSize:12,color:"var(--t)",flexShrink:0}}>
+                    {v}
+                  </div>
                 </div>
               ))}
-              <div className="div"/>
-              <button className="btn btd bsm" onClick={()=>show("Password reset email sent","g")}>Change Password</button>
-            </div>
-          )}
+            </Card>
+          </>}
 
-          {section==="notifications"&&(
-            <div className="card cp">
-              <div className="ct mb5">Notification Preferences</div>
-              {[
-                {k:"emailNotifications",  l:"Email Notifications",  sub:"Get notified via email"},
-                {k:"smsNotifications",    l:"SMS Notifications",     sub:"Get notified via SMS"},
-                {k:"pushNotifications",   l:"Push Notifications",    sub:"Browser push notifications"},
-              ].map(p=>(
-                <div key={p.k} className="mrow">
-                  <div><div style={{fontSize:12.5,fontWeight:700}}>{p.l}</div><div className="xs t3">{p.sub}</div></div>
-                  <div className={`tog ${st[p.k]?"on":""}`} onClick={()=>toggleSetting(p.k)}/>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {section==="appearance"&&(
-            <div className="card cp">
-              <div className="ct mb5">Appearance</div>
-              <div className="field mb4"><label className="flbl">Accent Color</label>
-                <div className="f fa gap2 mt2">
-                  {["#6c6cff","#8b5cf6","#06b6d4","#22c55e","#f43f5e","#f59e0b"].map(c=>(
-                    <div key={c} className="cur" onClick={()=>{actions.updateSettings({accentColor:c});show("Theme updated","g");}} style={{width:26,height:26,borderRadius:"50%",background:c,border:`2px solid ${st.accentColor===c?"white":"transparent"}`,transition:"border .13s"}}/>
-                  ))}
-                </div>
-              </div>
-              {[
-                {k:"darkMode",       l:"Dark Mode",       sub:"Always use dark theme"},
-                {k:"compactSidebar", l:"Compact Sidebar", sub:"Collapse nav labels"},
-                {k:"reducedMotion",  l:"Reduced Motion",  sub:"Disable animations"},
-                {k:"highContrast",   l:"High Contrast",   sub:"Enhanced accessibility"},
-              ].map(p=>(
-                <div key={p.k} className="mrow">
-                  <div><div style={{fontSize:12.5,fontWeight:700}}>{p.l}</div><div className="xs t3">{p.sub}</div></div>
-                  <div className={`tog ${st[p.k]?"on":""}`} onClick={()=>toggleSetting(p.k)}/>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {section==="api"&&(
-            <div className="card cp">
-              <div className="ct mb5">API Keys & Webhooks</div>
-              <div className="sectitle">API Keys</div>
-              <div style={{background:"var(--bg3)",border:"1px solid var(--bd)",borderRadius:8,padding:"12px 14px",marginBottom:12}}>
-                <div className="f fj fa mb1"><span className="xs bold">Production API Key</span><span className="badge bg xs">Active</span></div>
-                <div className="mono xs t3">{revealed?"nexa_prod_sk_live_a8f72c91d3b4e56f78901234abcdef":"nexa_prod_sk_live_••••••••••••••••••••••••••••••••"}</div>
-                <div className="f gap2 mt2">
-                  <button className="btn btg bxs" onClick={()=>{setRevealed(r=>!r);}}>
-                    {revealed?"🙈 Hide":"👁 Reveal"}
-                  </button>
-                  <button className="btn btg bxs" onClick={()=>show("API key regenerated","g")}>🔄 Regenerate</button>
-                  <button className="btn btg bxs" onClick={()=>{navigator.clipboard?.writeText("nexa_prod_sk_live_a8f72c91d3b4e56f78901234abcdef");show("Copied!","g");}}>📋 Copy</button>
-                </div>
-              </div>
-              <button className="btn btp bsm mb5" onClick={()=>show("New API key generated","g")}>+ Generate New Key</button>
-              <div className="sectitle">Webhooks</div>
-              <div className="field"><label className="flbl">Webhook URL</label><input className="inp" placeholder="https://your-app.com/webhooks/nexa"/></div>
-              <button className="btn btg bsm mt2" onClick={()=>show("Webhook saved","g")}>Save Webhook</button>
-            </div>
-          )}
-
-          {section==="audit"&&(
-            <div className="card" style={{padding:0}}>
-              <div className="f fj fa" style={{padding:"14px 18px",borderBottom:"1px solid var(--bd)"}}><div className="ct">Audit Log</div><span className="xs t3">{state.auditLog?.length||0} entries</span></div>
-              {(state.auditLog||[]).length===0&&<div className="empty"><div className="eico">📋</div><div className="esub">No audit entries yet. Actions will appear here.</div></div>}
-              <div className="tw">
-                <table>
-                  <thead><tr><th>Time</th><th>Module</th><th>Action</th><th>User</th></tr></thead>
+          {/* ─── USERS ─────────────────────────────────────────────── */}
+          {section==="users" && (
+            <Card title="Users & Permissions" sub={`${(state.employees||[]).length} team members`}
+              action={<button className="btn btp bsm" onClick={()=>show("Invite email sent","g")}>+ Invite User</button>}>
+              <div style={{margin:"0 -20px"}}>
+                <table style={{width:"100%",borderCollapse:"collapse"}}>
+                  <thead><tr><th>User</th><th>Role</th><th>Dept</th><th>Status</th><th>Joined</th><th>Permission Level</th></tr></thead>
                   <tbody>
-                    {(state.auditLog||[]).slice(0,50).map(e=>(
-                      <tr key={e.id}><td className="xs t3">{timeAgo(e.time)}</td><td><span className="badge bgr xs">{e.module}</span></td><td className="xs">{e.action}</td><td className="xs t2">{e.user}</td></tr>
+                    {(state.employees||[]).map(e=>(
+                      <tr key={e.id}>
+                        <td>
+                          <div className="f fa gap2">
+                            <Av name={e.name} size="sm"/>
+                            <div><div style={{fontSize:12.5,fontWeight:600}}>{e.name}</div><div className="xs t3">{e.email}</div></div>
+                          </div>
+                        </td>
+                        <td className="xs">{e.role}</td>
+                        <td className="xs t2">{e.dept}</td>
+                        <td><Bdg s={e.status}/></td>
+                        <td className="xs t3">{e.join}</td>
+                        <td>
+                          <select className="inp" style={{height:28,fontSize:11,width:"auto"}}
+                            defaultValue={e.id==="usr_AM"?"Super Admin":e.dept==="Finance"?"Finance Admin":"Member"}>
+                            {["Super Admin","Admin","Finance Admin","HR Admin","Manager","Member","Viewer"].map(r=><option key={r}>{r}</option>)}
+                          </select>
+                        </td>
+                      </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
-            </div>
+            </Card>
           )}
 
-          {section==="shortcuts"&&(
-            <div className="card cp">
-              <div className="ct mb5">Keyboard Shortcuts</div>
+          {/* ─── BILLING ───────────────────────────────────────────── */}
+          {section==="billing" && <>
+            <Card title="Current Plan">
+              <div className="f fa gap4 mb5">
+                <div style={{flex:1}}>
+                  <div className="f fa gap2 mb1">
+                    <span style={{fontSize:22,fontWeight:900}}>Enterprise</span>
+                    <span className="badge bg">Active</span>
+                  </div>
+                  <div className="t2" style={{fontSize:14}}>USD 299 / month · 25 seats included</div>
+                  <div className="xs t3 mt1">Next billing: 25 June 2026</div>
+                </div>
+                <button className="btn btg bsm" onClick={()=>show("Plan management opened","g")}>Change Plan</button>
+              </div>
+              <div style={{background:"var(--bg3)",border:"1px solid var(--bd)",borderRadius:"var(--radsm)",padding:"14px 16px"}}>
+                <div className="sectitle mb3">What's included</div>
+                <div className="g g2 gap2">
+                  {["Unlimited invoices","All 19 modules","Multi-company profiles","REST API access","Priority support (2h SLA)","Full audit logging","Custom automation workflows","SSO / SAML ready","99.9% uptime SLA","Dedicated account manager"].map(f=>(
+                    <div key={f} className="f fa gap1 xs"><span className="tg">✓</span><span>{f}</span></div>
+                  ))}
+                </div>
+              </div>
+            </Card>
+
+            <Card title="Payment Method">
+              <Row ico="💳" label="Visa •••• 4242" sub="Expires 08/2028 · Billing to Nexa Corp"
+                right={<button className="btn btg bsm" onClick={()=>show("Card management opened","g")}>Update</button>}/>
+              <div className="mt3">
+                <button className="btn btg bsm" onClick={()=>show("Invoice history opened","g")}>📄 View Invoice History</button>
+              </div>
+            </Card>
+          </>}
+
+          {/* ─── API & WEBHOOKS ────────────────────────────────────── */}
+          {section==="api" && <>
+            <Card title="API Keys" sub="Use these keys to authenticate requests to the NexaERP API">
               {[
-                {key:"⌘K",  a:"Open command palette"},
-                {key:"⌘/",  a:"Toggle sidebar"},
-                {key:"Esc", a:"Close modal / cancel"},
-                {key:"Enter",a:"Submit form"},
-                {key:"G D", a:"Go to Dashboard"},
-                {key:"G C", a:"Go to CRM"},
-                {key:"G S", a:"Go to Sales"},
-                {key:"G H", a:"Go to Helpdesk"},
-                {key:"G I", a:"Go to Inventory"},
-              ].map(s=>(
-                <div key={s.key} className="mrow"><span style={{fontSize:12.5}}>{s.a}</span><span className="kbd">{s.key}</span></div>
+                {label:"Production Key", key:"nexa_prod_sk_live_a8f72c91d3b4e56f789012", env:"Production", last:"2 hours ago"},
+                {label:"Staging Key",    key:"nexa_test_sk_test_b3c4d5e6f789012abcde3", env:"Staging",    last:"Never"},
+              ].map((ak,i)=>(
+                <div key={i} style={{background:"var(--bg3)",border:"1px solid var(--bd)",borderRadius:"var(--radsm)",padding:"14px 16px",marginBottom:i===0?12:0}}>
+                  <div className="f fj fa mb2">
+                    <div className="f fa gap2">
+                      <span style={{fontSize:13,fontWeight:700}}>{ak.label}</span>
+                      <span className="badge bb xs">{ak.env}</span>
+                    </div>
+                    <span className="xs t3">Last used: {ak.last}</span>
+                  </div>
+                  <div style={{background:"var(--bg2)",border:"1px solid var(--bd)",borderRadius:"var(--radsm)",padding:"10px 13px",fontFamily:"var(--mono)",fontSize:11.5,color:"var(--t3)",marginBottom:10,letterSpacing:".03em",wordBreak:"break-all"}}>
+                    {revealed ? ak.key : ak.key.slice(0,14)+"••••••••••••••••••••••"}
+                  </div>
+                  <div className="f ga gap2">
+                    <button className="btn btg bxs" onClick={()=>setRevealed(r=>!r)}>{revealed?"🙈 Hide":"👁 Reveal"}</button>
+                    <button className="btn btg bxs" onClick={()=>{ navigator.clipboard?.writeText(ak.key); show("Copied to clipboard","g"); }}>📋 Copy</button>
+                    <button className="btn btg bxs" onClick={()=>show("Key regenerated. Update your integrations.","g")}>🔄 Regenerate</button>
+                    {i>0 && <button className="btn btd bxs" onClick={()=>show("Key deleted","g")}>🗑 Delete</button>}
+                  </div>
+                </div>
               ))}
-            </div>
+              <button className="btn btp bsm mt3" onClick={()=>show("New API key generated","g")}>+ Generate New Key</button>
+            </Card>
+
+            <Card title="Webhook Endpoint" sub="NexaERP will POST event payloads to your URL">
+              <div className="field mb3">
+                <label className="flbl">Endpoint URL *</label>
+                <input className="inp" value={webhookUrl} onChange={e=>setWebhookUrl(e.target.value)} placeholder="https://your-app.com/webhooks/nexa"/>
+              </div>
+              <div className="sectitle mb2">Subscribe to Events</div>
+              <div className="g g2 gap2 mb3">
+                {Object.entries(webhookEvs).map(([k,on])=>(
+                  <label key={k} className="f fa gap2 cur"
+                    style={{padding:"9px 12px",background:"var(--bg3)",borderRadius:"var(--radsm)",
+                            border:`1px solid ${on?"var(--a)":"var(--bd)"}`,transition:"border .13s"}}>
+                    <input type="checkbox" checked={on} onChange={()=>toggleEv(k)} style={{accentColor:"var(--a)",width:14,height:14}}/>
+                    <span style={{fontSize:12.5}}>{k.charAt(0).toUpperCase()+k.slice(1)} events</span>
+                  </label>
+                ))}
+              </div>
+              <button className="btn btp bsm" onClick={()=>{ if(!webhookUrl){show("Enter a webhook URL","r");return;} show("Webhook endpoint saved","g"); }}>Save Webhook</button>
+            </Card>
+          </>}
+
+          {/* ─── INTEGRATIONS ──────────────────────────────────────── */}
+          {section==="integrations" && (
+            <Card title="Third-Party Integrations" sub="Connect external services to extend NexaERP">
+              {[
+                {name:"M-Pesa / Daraja",  ico:"💳",desc:"Accept mobile money payments and auto-reconcile",connected:true },
+                {name:"Safaricom SMS",    ico:"📱",desc:"Send SMS notifications via Safaricom Business SMS",connected:true },
+                {name:"Slack",           ico:"💬",desc:"Post alerts and notifications to Slack channels",  connected:false},
+                {name:"Google Workspace",ico:"📧",desc:"Sync calendar events and send emails via Gmail",   connected:false},
+                {name:"QuickBooks",      ico:"📊",desc:"Sync accounting data with QuickBooks Online",      connected:false},
+                {name:"Shopify",         ico:"🛍",desc:"Import orders and sync inventory with Shopify",    connected:false},
+                {name:"WhatsApp Business",ico:"💬",desc:"Send invoices and reminders via WhatsApp",       connected:false},
+                {name:"Stripe",          ico:"💳",desc:"Accept global card payments via Stripe",           connected:false},
+              ].map(integ=>(
+                <Row key={integ.name}
+                  ico={<div style={{width:40,height:40,borderRadius:10,background:"var(--bg3)",border:"1px solid var(--bd)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:20}}>{integ.ico}</div>}
+                  label={integ.name} sub={integ.desc}
+                  right={
+                    <div className="f fa gap2">
+                      {integ.connected && <span className="badge bg xs">● Connected</span>}
+                      <button className={`btn ${integ.connected?"btd":"btp"} bsm`} onClick={()=>show(integ.connected?`${integ.name} disconnected`:`${integ.name} connected`,"g")}>
+                        {integ.connected?"Disconnect":"Connect"}
+                      </button>
+                    </div>
+                  }/>
+              ))}
+            </Card>
           )}
 
-          {!["company","profile","security","notifications","appearance","api","audit","shortcuts"].includes(section)&&(
-            <div className="card cp">
-              <div className="ct mb3">{secs.find(s=>s.id===section)?.l}</div>
-              <div className="empty"><div className="eico">{secs.find(s=>s.id===section)?.ico}</div><div className="esub">Configure {(secs.find(s=>s.id===section)?.l||"").toLowerCase()} settings here</div></div>
-            </div>
+          {/* ─── AUDIT LOG ─────────────────────────────────────────── */}
+          {section==="audit" && (
+            <Card title="Audit Log" sub={`${log.length} entries recorded`}
+              action={<button className="btn btg bsm" onClick={()=>show("Audit log exported","g")}>📤 Export CSV</button>}>
+              {log.length===0
+                ? <div className="empty"><div className="eico">📋</div><div className="esub">No audit entries yet. Actions appear here as you use the system.</div></div>
+                : <div style={{margin:"0 -20px"}}>
+                    <table style={{width:"100%",borderCollapse:"collapse"}}>
+                      <thead><tr><th>Time</th><th>Module</th><th>Action</th><th>User</th></tr></thead>
+                      <tbody>
+                        {log.slice(0,100).map(e=>(
+                          <tr key={e.id}>
+                            <td className="xs t3">{timeAgo(e.time)}</td>
+                            <td><span className="badge bgr xs">{e.module}</span></td>
+                            <td className="xs">{e.action}</td>
+                            <td className="xs t2">{e.user}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+              }
+            </Card>
           )}
-        </div>
-      </div>
+
+          {/* ─── SHORTCUTS ─────────────────────────────────────────── */}
+          {section==="shortcuts" && (
+            <Card title="Keyboard Shortcuts" sub="Speed up your workflow with these shortcuts">
+              {[
+                {group:"Global", items:[
+                  {key:"⌘K",  a:"Open command palette"},
+                  {key:"⌘/",  a:"Toggle sidebar"},
+                  {key:"Esc", a:"Close modal / cancel"},
+                ]},
+                {group:"Navigation", items:[
+                  {key:"G  D",a:"Dashboard"},
+                  {key:"G  C",a:"CRM"},
+                  {key:"G  S",a:"Sales"},
+                  {key:"G  I",a:"Inventory"},
+                  {key:"G  H",a:"Helpdesk"},
+                  {key:"G  P",a:"Projects"},
+                ]},
+                {group:"Actions", items:[
+                  {key:"⌘N",  a:"New record (context-aware)"},
+                  {key:"⌘S",  a:"Save current form"},
+                  {key:"⌘F",  a:"Focus search"},
+                  {key:"⌘↵",  a:"Submit active form"},
+                  {key:"Del", a:"Delete selected record"},
+                ]},
+              ].map(group=>(
+                <div key={group.group} style={{marginBottom:20}}>
+                  <div className="sectitle mb2">{group.group}</div>
+                  {group.items.map(s=>(
+                    <div key={s.key} className="stg-row">
+                      <span style={{fontSize:12.5}}>{s.a}</span>
+                      <span className="kbd">{s.key}</span>
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </Card>
+          )}
+
+        </div>{/* end stg-panel */}
+      </div>{/* end stg-wrap */}
     </div>
   );
 }
@@ -4082,11 +4715,11 @@ function NexaERP() {
               </div>
             </div>
 
-            <div className="strig" onClick={() => setCmd(true)}>
-              <span style={{fontSize:14,color:"var(--t3)"}}>⌕</span>
-              <span>Search everything…</span>
-              <span className="kbd">⌘K</span>
-            </div>
+            <button className="strig" onClick={() => setCmd(true)} title="Search  ⌘K" aria-label="Search">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+              </svg>
+            </button>
 
             <div className="tbr">
               {offline && (
