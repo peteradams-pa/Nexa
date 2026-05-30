@@ -104,10 +104,12 @@ const CSS_STYLES = `
   .tbr{display:flex;align-items:center;gap:6px;flex-shrink:0}
   .bc{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--t2)}
   .bcsep{color:var(--t3)}.bccur{color:var(--t);font-weight:700}
-  .strig{display:flex;align-items:center;justify-content:center;width:36px;height:36px;background:var(--sf);border:1px solid var(--bd);border-radius:50%;cursor:pointer;transition:all .16s var(--ease);flex-shrink:0;outline:none;color:var(--t3)}
-  .strig:hover{border-color:var(--bdh);background:var(--sfh);box-shadow:0 0 0 3px rgba(108,108,255,.1);color:var(--t)}
-  .strig:focus-visible{box-shadow:0 0 0 3px rgba(108,108,255,.35);border-color:var(--a)}
-  .strig svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;transition:stroke .14s;display:block}
+  .strig{display:flex;align-items:center;gap:8px;height:34px;padding:0 14px 0 12px;background:var(--sf);border:1px solid var(--bd);border-radius:17px;cursor:pointer;transition:all .16s var(--ease);flex-shrink:0;outline:none;color:var(--t3);min-width:160px;max-width:240px}
+  .strig:hover{border-color:var(--bdh);background:var(--sfh);color:var(--t2)}
+  .strig:focus-visible{box-shadow:0 0 0 3px rgba(108,108,255,.2);border-color:var(--a)}
+  .strig svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;display:block}
+  .strig-txt{font-size:12px;flex:1;color:var(--t3)}
+  .strig-kbd{font-family:var(--mono);font-size:9.5px;color:var(--t3);background:var(--bg3);border:1px solid var(--bd);border-radius:4px;padding:1px 5px;white-space:nowrap;flex-shrink:0}
   .kbd{font-family:var(--mono);font-size:9.5px;color:var(--t3);background:var(--bg3);border:1px solid var(--bd);border-radius:4px;padding:1px 5px;white-space:nowrap}
   .content{flex:1;overflow-y:auto;overflow-x:hidden}
   .ci{padding:22px 24px}
@@ -138,7 +140,7 @@ const CSS_STYLES = `
   .sv{font-size:24px;font-weight:800;letter-spacing:-.7px;line-height:1}
   .sc{font-size:11px;margin-top:5px;display:flex;align-items:center;gap:3px}
   .sc.up{color:var(--g)}.sc.dn{color:var(--r)}
-  .sico{position:absolute;top:16px;right:16px;width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px}
+  .st-ico{position:absolute;top:16px;right:16px;width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px}
 
   .tw{overflow-x:auto}.tw.bd{border:1px solid var(--bd);border-radius:var(--rad)}
   table{width:100%;border-collapse:collapse}
@@ -241,6 +243,32 @@ const CSS_STYLES = `
   .gauto{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
   .gap2{gap:8px}.gap3{gap:12px}.gap4{gap:16px}.gap5{gap:20px}
   .f{display:flex}.fc{flex-direction:column}.fa{align-items:center}.fj{justify-content:space-between}.fjc{justify-content:center}.f1{flex:1}.fw{flex-wrap:wrap}
+  /* ── GLOBAL ICON + LABEL ALIGNMENT ── */
+  /* Every flex row aligns vertically */
+  .f{align-items:center}
+  /* Page headers */
+  .ph{align-items:flex-start}
+  .ph > div:first-child{display:flex;flex-direction:column;gap:3px}
+  /* Stat card icon */
+  .st-ico{position:absolute;top:16px;right:16px;width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;line-height:1}
+  /* Table cells */
+  tbody td{vertical-align:middle}
+  tbody td > .f{align-items:center}
+  /* Card/section headers */
+  .ch,.card-header,.f.fj{align-items:center}
+  /* Badge inline alignment */
+  .badge{vertical-align:middle;line-height:1}
+  /* Nav items — icons and labels same line guaranteed */
+  .sit,.stg-nav-item,.di,.mch,.upill{align-items:center}
+  .sico,.stg-ico{line-height:1;display:flex;align-items:center;justify-content:center}
+  /* POS product cards */
+  .pp{display:flex;flex-direction:column;align-items:center}
+  /* Kanban card footer */
+  .kcft{align-items:center}
+  /* All rows in settings */
+  .stg-row{align-items:center}
+  /* Module page subtitle */
+  .psub{line-height:1.5}
   .mb1{margin-bottom:4px}.mb2{margin-bottom:8px}.mb3{margin-bottom:12px}.mb4{margin-bottom:16px}.mb5{margin-bottom:20px}.mb6{margin-bottom:24px}
   .mt1{margin-top:4px}.mt2{margin-top:8px}.mt3{margin-top:12px}.mt4{margin-top:16px}
   .p3{padding:12px}.p4{padding:16px}.p5{padding:20px}
@@ -342,7 +370,7 @@ const CSS_STYLES = `
   }
   @media(max-width:500px){
     .g4,.g3,.g2{grid-template-columns:1fr}.ph{flex-direction:column}
-    .strig{min-width:0;flex:1}.kbd{display:none}.topbar{padding:0 12px}
+    .strig{min-width:120px;max-width:180px}.strig-kbd{display:none}.topbar{padding:0 12px}
   }
 
   /* ── SETTINGS PAGE ── */
@@ -880,6 +908,18 @@ function appReducer(state, action) {
     case 'LOG_ACTION':
       return { ...state, auditLog: [{ ...action.entry, id:`al${Date.now()}`, time:now() }, ...state.auditLog.slice(0,499)] };
 
+    case 'UPDATE_PROFILE':
+      return { ...state, currentUser: { ...state.currentUser, ...action.payload } };
+    case 'RESET_FOR_COMPANY': {
+      const base = buildInitialState();
+      return {
+        ...base,
+        isAuthenticated: true,
+        currentUser: state.currentUser,
+        company: action.company,
+        settings: state.settings,
+      };
+    }
     default:
       return state;
   }
@@ -955,6 +995,8 @@ function AppProvider({ children }) {
     updateCampaign: (payload) => dispatch({ type:'UPDATE_CAMPAIGN', payload }),
     addDoc: (payload) => dispatch({ type:'ADD_DOC', payload }),
     deleteDoc: (id) => dispatch({ type:'DELETE_DOC', id }),
+    resetForCompany: (company) => dispatch({ type:'RESET_FOR_COMPANY', company }),
+    updateProfile: (payload) => dispatch({ type:'UPDATE_PROFILE', payload }),
     log: (entry) => dispatch({ type:'LOG_ACTION', entry }),
   }), []);
 
@@ -1345,7 +1387,7 @@ function Dashboard({ nav }) {
       <div className="g g4 gap4 mb5">
         {stats.map(s=>(
           <div key={s.l} className="stat cur" onClick={()=>nav(s.mod)}>
-            <div className="sico" style={{background:`${s.c}18`}}>{s.ico}</div>
+            <div className="st-ico" style={{background:`${s.c}18`}}>{s.ico}</div>
             <div className="slb">{s.l}</div>
             <div className="sv">{s.v}</div>
             <div className={`sc ${s.up?"up":"dn"}`}>{s.up?"↑":"↓"} {s.chg} vs last month
@@ -1707,7 +1749,7 @@ function Sales() {
           {l:"Outstanding",   v:fmt(sel.outstanding), ico:"⏳",c:"#f59e0b"},
           {l:"Overdue",       v:fmt(sel.overdue),     ico:"⚠️",c:"#ef4444"},
         ].map(s=>(
-          <div key={s.l} className="stat"><div className="sico" style={{background:`${s.c}18`}}>{s.ico}</div><div className="slb">{s.l}</div><div className="sv" style={{fontSize:20}}>{s.v}</div></div>
+          <div key={s.l} className="stat"><div className="st-ico" style={{background:`${s.c}18`}}>{s.ico}</div><div className="slb">{s.l}</div><div className="sv" style={{fontSize:20}}>{s.v}</div></div>
         ))}
       </div>
       <div className="card" style={{padding:0}}>
@@ -1861,7 +1903,7 @@ function Accounting() {
               {l:"Accounts Receivable",  v:fmt(totalAR),     ico:"📥", sub:`${invoices.filter(i=>["Pending","Overdue"].includes(i.status)).length} open invoices`, c:"#6c6cff"},
               {l:"Accounts Payable",     v:fmt(totalAP),     ico:"📤", sub:"5 bills due",  c:"#f59e0b"},
             ].map(s=>(
-              <div key={s.l} className="stat"><div className="sico" style={{background:`${s.c}18`}}>{s.ico}</div><div className="slb">{s.l}</div><div className="sv" style={{fontSize:22}}>{s.v}</div><div className="xs t3 mt1">{s.sub}</div></div>
+              <div key={s.l} className="stat"><div className="st-ico" style={{background:`${s.c}18`}}>{s.ico}</div><div className="slb">{s.l}</div><div className="sv" style={{fontSize:22}}>{s.v}</div><div className="xs t3 mt1">{s.sub}</div></div>
             ))}
           </div>
           <div className="g gap4" style={{gridTemplateColumns:"1fr 1fr"}}>
@@ -2031,7 +2073,7 @@ function Inventory() {
           {l:"Warehouses",       v:"3",                          ico:"🏭",c:"#06b6d4",alert:false},
         ].map(s=>(
           <div key={s.l} className="stat" style={{borderColor:s.alert?"rgba(245,158,11,.3)":undefined}}>
-            <div className="sico" style={{background:`${s.c}18`}}>{s.ico}</div>
+            <div className="st-ico" style={{background:`${s.c}18`}}>{s.ico}</div>
             <div className="slb">{s.l}</div>
             <div className="sv" style={{fontSize:22,color:s.alert?"var(--am)":undefined}}>{s.v}</div>
           </div>
@@ -2332,7 +2374,7 @@ function HR() {
           {l:"Payroll (Month)",v:fmt(sel.payrollNet),               ico:"💰",c:"#22c55e"},
           {l:"Open Positions", v:"3",                               ico:"📋",c:"#06b6d4"},
         ].map(s=>(
-          <div key={s.l} className="stat"><div className="sico" style={{background:`${s.c}18`}}>{s.ico}</div><div className="slb">{s.l}</div><div className="sv" style={{fontSize:22}}>{s.v}</div></div>
+          <div key={s.l} className="stat"><div className="st-ico" style={{background:`${s.c}18`}}>{s.ico}</div><div className="slb">{s.l}</div><div className="sv" style={{fontSize:22}}>{s.v}</div></div>
         ))}
       </div>
       <div className="tabs mb4">{["employees","payroll","attendance","recruitment"].map(t=><div key={t} className={`tab ${tab===t?"act":""}`} onClick={()=>setTab(t)}>{t.charAt(0).toUpperCase()+t.slice(1)}</div>)}</div>
@@ -2680,7 +2722,7 @@ function Helpdesk() {
       </div>
       <div className="g g4 gap4 mb5">
         {[{l:"Open",v:fmtN(open),c:"#f59e0b",ico:"🔓"},{l:"In Progress",v:fmtN(inProg),c:"#6c6cff",ico:"⚙️"},{l:"Resolved",v:fmtN(resolved),c:"#22c55e",ico:"✅"},{l:"Avg Response",v:"2.4h",c:"var(--t)",ico:"⏱️"}].map(s=>(
-          <div key={s.l} className="stat"><div className="sico" style={{background:`${s.c}18`}}>{s.ico}</div><div className="slb">{s.l}</div><div className="sv" style={{fontSize:22,color:s.c}}>{s.v}</div></div>
+          <div key={s.l} className="stat"><div className="st-ico" style={{background:`${s.c}18`}}>{s.ico}</div><div className="slb">{s.l}</div><div className="sv" style={{fontSize:22,color:s.c}}>{s.v}</div></div>
         ))}
       </div>
       <div className="g gap4" style={{gridTemplateColumns:"1fr 320px"}}>
@@ -3061,7 +3103,7 @@ function Manufacturing() {
       <div className="ph"><div><h1 className="ptitle">Manufacturing</h1><p className="psub">Bills of Materials · Work Orders · Quality Control · Maintenance</p></div><div className="f fa gap2"><button className="btn btg bsm" onClick={()=>show("New BOM created","g")}>+ New BOM</button><button className="btn btp bsm" onClick={()=>show("Work order created","g")}>+ Work Order</button></div></div>
       <div className="g g3 gap4 mb5">
         {[{l:"Active Work Orders",v:fmtN(wos.filter(w=>w.status==="In Progress").length),ico:"⚙️",c:"#6c6cff"},{l:"BOMs Configured",v:"24",ico:"📋",c:"#06b6d4"},{l:"Quality Pass Rate",v:"95%",ico:"✅",c:"#22c55e"}].map(s=>(
-          <div key={s.l} className="stat"><div className="sico" style={{background:`${s.c}18`}}>{s.ico}</div><div className="slb">{s.l}</div><div className="sv" style={{fontSize:24}}>{s.v}</div></div>
+          <div key={s.l} className="stat"><div className="st-ico" style={{background:`${s.c}18`}}>{s.ico}</div><div className="slb">{s.l}</div><div className="sv" style={{fontSize:24}}>{s.v}</div></div>
         ))}
       </div>
       <div className="g gap4" style={{gridTemplateColumns:"1fr 1fr"}}>
@@ -3308,7 +3350,7 @@ function Marketing() {
           {l:"Emails Sent (MTD)",v:fmtN(campaigns.reduce((s,c)=>s+c.sent,0)),ico:"✉️",c:"#22c55e"},
           {l:"Avg. Open Rate",   v:campaigns.filter(c=>c.sent>0).length>0?`${Math.round(campaigns.filter(c=>c.sent>0).reduce((s,c)=>s+(c.opens/c.sent*100),0)/campaigns.filter(c=>c.sent>0).length)}%`:"—",ico:"👁️",c:"#f59e0b"},
         ].map(s=>(
-          <div key={s.l} className="stat"><div className="sico" style={{background:`${s.c}18`}}>{s.ico}</div><div className="slb">{s.l}</div><div className="sv" style={{fontSize:24}}>{s.v}</div></div>
+          <div key={s.l} className="stat"><div className="st-ico" style={{background:`${s.c}18`}}>{s.ico}</div><div className="slb">{s.l}</div><div className="sv" style={{fontSize:24}}>{s.v}</div></div>
         ))}
       </div>
       <div className="card" style={{padding:0,marginBottom:16}}>
@@ -3415,7 +3457,7 @@ function ECommerce() {
           {l:"Total Orders",    v:fmtN(totalOnlineOrders),       ico:"🛒",c:"#06b6d4"},
           {l:"Avg Order Value", v:totalOnlineOrders>0?fmt(totalOnlineRev/totalOnlineOrders):"—",ico:"🎯",c:"#f59e0b"},
         ].map(s=>(
-          <div key={s.l} className="stat"><div className="sico" style={{background:`${s.c}18`}}>{s.ico}</div><div className="slb">{s.l}</div><div className="sv" style={{fontSize:18}}>{s.v}</div></div>
+          <div key={s.l} className="stat"><div className="st-ico" style={{background:`${s.c}18`}}>{s.ico}</div><div className="slb">{s.l}</div><div className="sv" style={{fontSize:18}}>{s.v}</div></div>
         ))}
       </div>
       <div className="gauto g gap3">
@@ -3715,6 +3757,13 @@ function Settings() {
   // ── toggle helper ─────────────────────────────────────────────────────────
   const tog = k => { actions.updateSettings({[k]:!st[k]}); show(`${k} ${!st[k]?"enabled":"disabled"}`,"g"); };
 
+  // notification event toggles (persisted in settings)
+  const notifEvs = st.notifEvents || {
+    notifInvoicePaid:true, notifInvoiceOverdue:true, notifNewLead:true, notifDealWon:true,
+    notifLowStock:true, notifNewTicket:true, notifTicketResolved:true, notifPayroll:false
+  };
+  const togNotifEv = k => actions.updateSettings({notifEvents:{...notifEvs,[k]:!notifEvs[k]}});
+
   // ── multi-company profiles (persisted in localStorage separately) ─────────
   const [companies, setCompanies] = useState(() => {
     try {
@@ -3733,7 +3782,7 @@ function Settings() {
     } catch(e) { return []; }
   });
 
-  const [activeCoId, setActiveCoId] = useState("co_1");
+  const [activeCoId, setActiveCoId] = useState(()=>localStorage.getItem('nexa_active_co')||'co_1');
   const [editVars,   setEditVars]   = useState(null);
   const [varForm,    setVarForm]    = useState({});
   const [showNewCo,  setShowNewCo]  = useState(false);
@@ -3746,17 +3795,31 @@ function Settings() {
   };
 
   const switchCompany = id => {
-    setActiveCoId(id);
     const c = companies.find(x => x.id === id);
-    if(c) actions.updateCompany({ name:c.name, industry:c.industry, currency:c.currency, vatPin:c.vatPin, phone:c.phone });
-    show(`Switched to ${companies.find(x=>x.id===id)?.name}`,"g");
+    if(!c) return;
+    if(window.confirm(`Switch to "${c.name}"? The app will reload with fresh data for this company.`)) {
+      setActiveCoId(id);
+      // Store the new active company so it survives the state reset
+      localStorage.setItem('nexa_active_co', id);
+      const companyData = {
+        name:c.name, legal:c.name+' Ltd.', industry:c.industry,
+        currency:c.currency, vatPin:c.vatPin, phone:c.phone,
+        website:c.website||'', country:c.country||'Kenya',
+        address:'', fiscalYear: c.vars?.fiscalYear||'January',
+      };
+      actions.resetForCompany(companyData);
+      show(`✅ Switched to ${c.name} — workspace reloaded`,"g");
+    }
   };
 
   const deleteCompany = id => {
     if(companies.length <= 1){ show("Cannot delete the only company","r"); return; }
-    saveCompanies(companies.filter(c => c.id !== id));
-    if(activeCoId === id) setActiveCoId(companies.find(c=>c.id!==id)?.id||"");
-    show("Company profile removed","g");
+    const co2 = companies.find(c=>c.id===id);
+    if(!window.confirm(`Delete "${co2?.name}"? This removes all company settings and cannot be undone.`)) return;
+    const updated = companies.filter(c => c.id !== id);
+    saveCompanies(updated);
+    if(activeCoId === id) setActiveCoId(updated[0]?.id||"");
+    show(`"${co2?.name}" removed`,"g");
   };
 
   const openVars = co2 => { setEditVars(co2.id); setVarForm({...co2.vars}); };
@@ -3778,14 +3841,30 @@ function Settings() {
 
   const addCompany = () => {
     if(!newCoForm.name.trim()){ show("Company name required","r"); return; }
-    saveCompanies([...companies, {...newCoForm, id:`co_${Date.now()}`}]);
-    show("Company profile created","g");
-    setShowNewCo(false); setNewCo({...emptyNewCo});
+    const newId = `co_${Date.now()}`;
+    const newC  = {...newCoForm, id:newId};
+    const updated = [...companies, newC];
+    saveCompanies(updated);
+    setShowNewCo(false);
+    setNewCo({...emptyNewCo});
+    show(`Company "${newC.name}" created`,"g");
+    setTimeout(()=>{
+      if(window.confirm(`Company "${newC.name}" created. Switch to it now? (This will reset the workspace for that company)`)){
+        setActiveCoId(newId);
+        localStorage.setItem('nexa_active_co', newId);
+        actions.resetForCompany({
+          name:newC.name, legal:newC.name+' Ltd.', industry:newC.industry,
+          currency:newC.currency, vatPin:newC.vatPin, phone:newC.phone,
+          website:newC.website||'', country:newC.country||'Kenya',
+          address:'', fiscalYear:newC.vars?.fiscalYear||'January',
+        });
+      }
+    }, 100);
   };
 
   // ── webhook state ─────────────────────────────────────────────────────────
-  const [webhookUrl, setWebhookUrl] = useState("");
-  const [webhookEvs, setWebhookEvs] = useState({invoice:true,lead:true,order:false,stock:true,ticket:false});
+  const [webhookUrl, setWebhookUrl] = useState(st.webhookUrl||"");
+  const [webhookEvs, setWebhookEvs] = useState(st.webhookEvs||{invoice:true,lead:true,order:false,stock:true,ticket:false});
   const toggleEv = k => setWebhookEvs(p => ({...p,[k]:!p[k]}));
 
   // ── password form ─────────────────────────────────────────────────────────
@@ -4092,7 +4171,7 @@ function Settings() {
                   </select>
                 </div>
               </div>
-              <button className="btn btp mt3" onClick={()=>show("Localization settings saved","g")}>Save Localization</button>
+              <button className="btn btp mt3" onClick={()=>{ actions.updateSettings({localization:{...locForm}}); show("Localization settings saved","g"); }}>Save Localization</button>
             </Card>
           )}
 
@@ -4109,7 +4188,13 @@ function Settings() {
                     <span className="badge bgr xs">{cu.dept||"—"}</span>
                   </div>
                 </div>
-                <button className="btn btg bsm" style={{marginLeft:"auto",alignSelf:"flex-start"}} onClick={()=>show("Photo upload triggered","g")}>📷 Change Photo</button>
+                <label className="btn btg bsm" style={{marginLeft:"auto",alignSelf:"flex-start",cursor:"pointer"}}>
+                  📷 Change Photo
+                  <input type="file" accept="image/*" style={{display:"none"}} onChange={e=>{
+                    const file=e.target.files?.[0];
+                    if(file) show(`Photo "${file.name}" uploaded`,"g");
+                  }}/>
+                </label>
               </div>
               <div className="g g2 gap3">
                 <div className="field"><label className="flbl">Full Name</label><input className="inp" value={profForm.name} onChange={e=>setPF("name",e.target.value)}/></div>
@@ -4118,7 +4203,7 @@ function Settings() {
                 <div className="field"><label className="flbl">Department</label><input className="inp" value={profForm.dept} onChange={e=>setPF("dept",e.target.value)}/></div>
                 <div className="field" style={{gridColumn:"span 2"}}><label className="flbl">Bio</label><textarea className="inp" value={profForm.bio} onChange={e=>setPF("bio",e.target.value)} placeholder="Brief description…" style={{minHeight:70}}/></div>
               </div>
-              <button className="btn btp mt3" onClick={()=>show("Profile updated","g")}>Save Profile</button>
+              <button className="btn btp mt3" onClick={()=>{ actions.updateProfile({name:profForm.name,email:profForm.email,dept:profForm.dept}); show("Profile updated","g"); }}>Save Profile</button>
             </Card>
 
             <Card title="Active Session">
@@ -4172,7 +4257,7 @@ function Settings() {
                 <Row key={i} ico="💻" label={s.d} sub={`${s.ip} · ${s.time}`}
                   right={s.cur
                     ? <span className="badge bg xs">● Current</span>
-                    : <button className="btn btd bxs" onClick={()=>show("Session revoked","g")}>Revoke</button>}/>
+                    : <button className="btn btd bxs" onClick={()=>{ if(window.confirm("Revoke this session? The device will be signed out immediately.")) show("Session revoked","g"); }}>Revoke</button>}/>
               ))}
             </Card>
           </>}
@@ -4200,13 +4285,20 @@ function Settings() {
                   {k:"notifTicketResolved", l:"Ticket Resolved"},
                   {k:"notifPayroll",        l:"Payroll Processed"},
                 ].map(p=>(
-                  <label key={p.k} className="f fa gap2 cur" style={{padding:"9px 12px",background:"var(--bg3)",borderRadius:"var(--radsm)",border:"1px solid var(--bd)"}}>
-                    <input type="checkbox" defaultChecked style={{accentColor:"var(--a)",width:14,height:14}}/>
+                  <label key={p.k} className="f fa gap2 cur"
+                    style={{padding:"9px 12px",
+                            background:notifEvs[p.k]?"rgba(108,108,255,.07)":"var(--bg3)",
+                            borderRadius:"var(--radsm)",
+                            border:`1px solid ${notifEvs[p.k]?"var(--a)":"var(--bd)"}`,
+                            transition:"all .13s",cursor:"pointer"}}>
+                    <input type="checkbox" checked={!!notifEvs[p.k]}
+                           onChange={()=>togNotifEv(p.k)}
+                           style={{accentColor:"var(--a)",width:14,height:14}}/>
                     <span style={{fontSize:12.5}}>{p.l}</span>
                   </label>
                 ))}
               </div>
-              <button className="btn btp bsm" onClick={()=>show("Notification preferences saved","g")}>Save Preferences</button>
+              <button className="btn btp bsm" onClick={()=>{ actions.updateSettings({notifEvents:notifEvs}); show("Notification preferences saved","g"); }}>Save Preferences</button>
             </Card>
           </>}
 
@@ -4311,7 +4403,8 @@ function Settings() {
                         <td className="xs t3">{e.join}</td>
                         <td>
                           <select className="inp" style={{height:28,fontSize:11,width:"auto"}}
-                            defaultValue={e.id==="usr_AM"?"Super Admin":e.dept==="Finance"?"Finance Admin":"Member"}>
+                            value={e.id==="usr_AM"?"Super Admin":st[`perm_${e.id}`]||(e.dept==="Finance"?"Finance Admin":e.dept==="HR"?"HR Admin":"Member")}
+                            onChange={ev=>{ actions.updateSettings({[`perm_${e.id}`]:ev.target.value}); show(`${e.name} → ${ev.target.value}`,"g"); }}>
                             {["Super Admin","Admin","Finance Admin","HR Admin","Manager","Member","Viewer"].map(r=><option key={r}>{r}</option>)}
                           </select>
                         </td>
@@ -4335,7 +4428,7 @@ function Settings() {
                   <div className="t2" style={{fontSize:14}}>USD 299 / month · 25 seats included</div>
                   <div className="xs t3 mt1">Next billing: 25 June 2026</div>
                 </div>
-                <button className="btn btg bsm" onClick={()=>show("Plan management opened","g")}>Change Plan</button>
+                <button className="btn btg bsm" onClick={()=>{ window.open("https://nexaerp.io/billing","_blank")||show("Opening billing portal…","g"); }}>Change Plan →</button>
               </div>
               <div style={{background:"var(--bg3)",border:"1px solid var(--bd)",borderRadius:"var(--radsm)",padding:"14px 16px"}}>
                 <div className="sectitle mb3">What's included</div>
@@ -4349,9 +4442,18 @@ function Settings() {
 
             <Card title="Payment Method">
               <Row ico="💳" label="Visa •••• 4242" sub="Expires 08/2028 · Billing to Nexa Corp"
-                right={<button className="btn btg bsm" onClick={()=>show("Card management opened","g")}>Update</button>}/>
+                right={<button className="btn btg bsm" onClick={()=>show("Card update modal — connect Stripe for live updates","g")}>Update Card</button>}/>
               <div className="mt3">
-                <button className="btn btg bsm" onClick={()=>show("Invoice history opened","g")}>📄 View Invoice History</button>
+                <button className="btn btg bsm" onClick={()=>{
+              const invs = (state.invoices||[]).filter(i=>i.status==="Paid");
+              const csv = [['Invoice','Customer','Date','Amount'],
+                ...invs.map(i=>[i.id,i.custName,i.date,i.total])
+              ].map(r=>r.join(',')).join('\n');
+              const a = document.createElement('a');
+              a.href = URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+              a.download = `nexaerp-invoices-${new Date().toISOString().slice(0,10)}.csv`;
+              a.click(); show("Invoice history downloaded","g");
+            }}>📄 Download Invoice History</button>
               </div>
             </Card>
           </>}
@@ -4374,7 +4476,7 @@ function Settings() {
                   <div style={{background:"var(--bg2)",border:"1px solid var(--bd)",borderRadius:"var(--radsm)",padding:"10px 13px",fontFamily:"var(--mono)",fontSize:11.5,color:"var(--t3)",marginBottom:10,letterSpacing:".03em",wordBreak:"break-all"}}>
                     {revealed ? ak.key : ak.key.slice(0,14)+"••••••••••••••••••••••"}
                   </div>
-                  <div className="f ga gap2">
+                  <div className="f fa gap2">
                     <button className="btn btg bxs" onClick={()=>setRevealed(r=>!r)}>{revealed?"🙈 Hide":"👁 Reveal"}</button>
                     <button className="btn btg bxs" onClick={()=>{ navigator.clipboard?.writeText(ak.key); show("Copied to clipboard","g"); }}>📋 Copy</button>
                     <button className="btn btg bxs" onClick={()=>show("Key regenerated. Update your integrations.","g")}>🔄 Regenerate</button>
@@ -4401,7 +4503,7 @@ function Settings() {
                   </label>
                 ))}
               </div>
-              <button className="btn btp bsm" onClick={()=>{ if(!webhookUrl){show("Enter a webhook URL","r");return;} show("Webhook endpoint saved","g"); }}>Save Webhook</button>
+              <button className="btn btp bsm" onClick={()=>{ if(!webhookUrl){show("Enter a webhook URL","r");return;} actions.updateSettings({webhookUrl,webhookEvs}); show("Webhook endpoint saved","g"); }}>Save Webhook</button>
             </Card>
           </>}
 
@@ -4409,14 +4511,16 @@ function Settings() {
           {section==="integrations" && (
             <Card title="Third-Party Integrations" sub="Connect external services to extend NexaERP">
               {[
-                {name:"M-Pesa / Daraja",  ico:"💳",desc:"Accept mobile money payments and auto-reconcile",connected:true },
-                {name:"Safaricom SMS",    ico:"📱",desc:"Send SMS notifications via Safaricom Business SMS",connected:true },
-                {name:"Slack",           ico:"💬",desc:"Post alerts and notifications to Slack channels",  connected:false},
-                {name:"Google Workspace",ico:"📧",desc:"Sync calendar events and send emails via Gmail",   connected:false},
-                {name:"QuickBooks",      ico:"📊",desc:"Sync accounting data with QuickBooks Online",      connected:false},
-                {name:"Shopify",         ico:"🛍",desc:"Import orders and sync inventory with Shopify",    connected:false},
-                {name:"WhatsApp Business",ico:"💬",desc:"Send invoices and reminders via WhatsApp",       connected:false},
-                {name:"Stripe",          ico:"💳",desc:"Accept global card payments via Stripe",           connected:false},
+                ...([
+                  {id:"mpesa",   name:"M-Pesa / Daraja",  ico:"💳",desc:"Accept mobile money payments and auto-reconcile"},
+                  {id:"sms",     name:"Safaricom SMS",    ico:"📱",desc:"Send SMS notifications via Safaricom Business SMS"},
+                  {id:"slack",   name:"Slack",           ico:"💬",desc:"Post alerts and notifications to Slack channels"},
+                  {id:"google",  name:"Google Workspace",ico:"📧",desc:"Sync calendar events and send emails via Gmail"},
+                  {id:"qb",      name:"QuickBooks",      ico:"📊",desc:"Sync accounting data with QuickBooks Online"},
+                  {id:"shopify", name:"Shopify",         ico:"🛍",desc:"Import orders and sync inventory with Shopify"},
+                  {id:"wa",      name:"WhatsApp Business",ico:"💬",desc:"Send invoices and reminders via WhatsApp"},
+                  {id:"stripe",  name:"Stripe",          ico:"💳",desc:"Accept global card payments via Stripe"},
+                ].map(x=>({...x, connected:!!(st.integrations||{mpesa:true,sms:true})[x.id]}))),
               ].map(integ=>(
                 <Row key={integ.name}
                   ico={<div style={{width:40,height:40,borderRadius:10,background:"var(--bg3)",border:"1px solid var(--bd)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:20}}>{integ.ico}</div>}
@@ -4424,7 +4528,11 @@ function Settings() {
                   right={
                     <div className="f fa gap2">
                       {integ.connected && <span className="badge bg xs">● Connected</span>}
-                      <button className={`btn ${integ.connected?"btd":"btp"} bsm`} onClick={()=>show(integ.connected?`${integ.name} disconnected`:`${integ.name} connected`,"g")}>
+                      <button className={`btn ${integ.connected?"btd":"btp"} bsm`} onClick={()=>{
+                      const cur = st.integrations||{mpesa:true,sms:true};
+                      actions.updateSettings({integrations:{...cur,[integ.id]:!integ.connected}});
+                      show(integ.connected?`${integ.name} disconnected`:`${integ.name} connected`,"g");
+                    }}>
                         {integ.connected?"Disconnect":"Connect"}
                       </button>
                     </div>
@@ -4436,7 +4544,14 @@ function Settings() {
           {/* ─── AUDIT LOG ─────────────────────────────────────────── */}
           {section==="audit" && (
             <Card title="Audit Log" sub={`${log.length} entries recorded`}
-              action={<button className="btn btg bsm" onClick={()=>show("Audit log exported","g")}>📤 Export CSV</button>}>
+              action={<button className="btn btg bsm" onClick={()=>{
+              const rows = [['Time','Module','Action','User'],...log.map(e=>[new Date(e.time).toLocaleString(),e.module,e.action,e.user])];
+              const csv = rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n');
+              const a = document.createElement('a');
+              a.href = URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+              a.download = `nexaerp-audit-${new Date().toISOString().slice(0,10)}.csv`;
+              a.click(); show("Audit log downloaded","g");
+            }}>📤 Export CSV</button>}>
               {log.length===0
                 ? <div className="empty"><div className="eico">📋</div><div className="esub">No audit entries yet. Actions appear here as you use the system.</div></div>
                 : <div style={{margin:"0 -20px"}}>
@@ -4545,7 +4660,7 @@ function NexaERP() {
   const sel = useSelectors();
 
   const [active,    setActive]    = useState("dashboard");
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(()=>!!state.settings?.compactSidebar);
   const [cmd,       setCmd]       = useState(false);
   const [offline,   setOffline]   = useState(!navigator.onLine);
   const [mobOpen,   setMobOpen]   = useState(false);
@@ -4554,6 +4669,11 @@ function NexaERP() {
   const [toast,     setToast]     = useState(null);
 
   // ── Online / Offline detection ─────────────────────────────────────────────
+  // Sync collapsed sidebar with compactSidebar setting
+  useEffect(() => {
+    setCollapsed(!!state.settings?.compactSidebar);
+  }, [state.settings?.compactSidebar]);
+
   useEffect(() => {
     const onOnline  = () => { setOffline(false); showToast("🟢 Back online — syncing…","g"); };
     const onOffline = () => { setOffline(true);  showToast("📡 Offline — changes saved locally","am"); };
@@ -4613,7 +4733,36 @@ function NexaERP() {
 
   return (
     <>
+      {/* Static base styles */}
       <style dangerouslySetInnerHTML={{__html: CSS_STYLES}}/>
+      {/* Dynamic theme overrides — re-injected on every settings change */}
+      <style dangerouslySetInnerHTML={{__html: `
+        :root {
+          --a: ${state.settings?.accentColor || '#6c6cff'};
+          --ah: ${(()=>{
+            const c=state.settings?.accentColor||'#6c6cff';
+            const r=Math.min(255,parseInt(c.slice(1,3),16)+20).toString(16).padStart(2,'0');
+            const g=Math.min(255,parseInt(c.slice(3,5),16)+20).toString(16).padStart(2,'0');
+            const b=Math.min(255,parseInt(c.slice(5,7),16)+20).toString(16).padStart(2,'0');
+            return '#'+r+g+b;
+          })()};
+          --a2: ${(state.settings?.accentColor||'#6c6cff') === '#6c6cff' ? '#9b5cf6' :
+                  (state.settings?.accentColor||'#6c6cff') === '#8b5cf6' ? '#a78bfa' :
+                  (state.settings?.accentColor||'#6c6cff') === '#06b6d4' ? '#22d3ee' :
+                  (state.settings?.accentColor||'#6c6cff') === '#22c55e' ? '#4ade80' :
+                  (state.settings?.accentColor||'#6c6cff') === '#f43f5e' ? '#fb7185' :
+                  (state.settings?.accentColor||'#6c6cff') === '#f59e0b' ? '#fbbf24' :
+                  (state.settings?.accentColor||'#6c6cff') === '#f97316' ? '#fb923c' :
+                  (state.settings?.accentColor||'#6c6cff') === '#ec4899' ? '#f472b6' : '#9b5cf6'};
+          --bg: ${state.settings?.bgMode || '#080810'};
+          --bg1: ${({'#080810':'#0f0f1a','#0a0a0a':'#111111','#0d0d14':'#141420','#0f1117':'#161720'})[state.settings?.bgMode] || '#0f0f1a'};
+          --bg2: ${({'#080810':'#141422','#0a0a0a':'#181818','#0d0d14':'#1a1a28','#0f1117':'#1c1d24'})[state.settings?.bgMode] || '#141422'};
+          --bg3: ${({'#080810':'#1a1a2e','#0a0a0a':'#202020','#0d0d14':'#20203a','#0f1117':'#222330'})[state.settings?.bgMode] || '#1a1a2e'};
+        }
+        ${state.settings?.compactSidebar ? '.sb:not(.mob){width:58px!important;min-width:58px!important} .sb:not(.mob) .slbl,.sb:not(.mob) .ssec,.sb:not(.mob) .sbadge,.sb:not(.mob) .ltxt,.sb:not(.mob) .lbadge,.sb:not(.mob) .uinf{opacity:0!important;width:0!important;overflow:hidden!important} .sb:not(.mob) .sit{padding:8px 19px!important}' : ''}
+        ${state.settings?.reducedMotion ? '*{transition:none!important;animation:none!important}' : ''}
+        ${state.settings?.highContrast  ? ':root{--bd:rgba(255,255,255,0.25);--bdh:rgba(255,255,255,0.45);--t2:#c0c0d8}' : ''}
+      `}}/>
       <div className="app">
 
         {/* ── Mobile overlay ── */}
@@ -4626,7 +4775,7 @@ function NexaERP() {
         <div className={`sb${collapsed?" col":""}${mobOpen?" mob":""}`}>
 
           {/* Logo / collapse toggle */}
-          <div className="lwrap" onClick={()=>setCollapsed(c=>!c)} title="Toggle sidebar (⌘/)">
+          <div className="lwrap" onClick={()=>setCollapsed(c=>{ const n=!c; actions.updateSettings({compactSidebar:n}); return n; })} title="Toggle sidebar (⌘/)">
             <div className="lmark">N</div>
             <span className="ltxt">NexaERP</span>
             <span className="lbadge">ENTERPRISE</span>
@@ -4715,10 +4864,12 @@ function NexaERP() {
               </div>
             </div>
 
-            <button className="strig" onClick={() => setCmd(true)} title="Search  ⌘K" aria-label="Search">
-              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <button className="strig" onClick={() => setCmd(true)} title="Search ⌘K" aria-label="Search">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
               </svg>
+              <span className="strig-txt">Search…</span>
+              <span className="strig-kbd">⌘K</span>
             </button>
 
             <div className="tbr">
